@@ -1,0 +1,301 @@
+
+.home-page.data-v-07e72d3c {
+		min-height: 100vh;
+		padding-bottom: 200rpx;
+		background-color: #f5f6f8;
+}
+.content.data-v-07e72d3c {
+		padding: 32rpx;
+}
+.profile-section.data-v-07e72d3c {
+		margin-bottom: 32rpx;
+}
+.profile-card.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 40rpx;
+}
+.avatar-container.data-v-07e72d3c {
+		position: relative;
+}
+.avatar.data-v-07e72d3c {
+		width: 160rpx;
+		height: 160rpx;
+		border-radius: 50%;
+		border: 4rpx solid #FF6B35;
+		padding: 4rpx;
+}
+.verified-badge.data-v-07e72d3c {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 48rpx;
+		height: 48rpx;
+		background-color: #00B4D8;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 4rpx solid #fff;
+}
+.profile-info.data-v-07e72d3c {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.name.data-v-07e72d3c {
+		font-size: 48rpx;
+		font-weight: bold;
+		color: #333;
+}
+.title.data-v-07e72d3c {
+		font-size: 28rpx;
+		color: #FF6B35;
+		font-weight: 500;
+}
+.school.data-v-07e72d3c {
+		font-size: 24rpx;
+		color: #999;
+}
+.income-card.data-v-07e72d3c {
+		padding: 48rpx;
+		border-radius: 24rpx;
+		margin-bottom: 32rpx;
+		position: relative;
+		overflow: hidden;
+}
+.income-header.data-v-07e72d3c {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 32rpx;
+}
+.income-label.data-v-07e72d3c {
+		font-size: 28rpx;
+		color: #666;
+		font-weight: 500;
+}
+.view-bill.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 8rpx;
+}
+.view-bill-text.data-v-07e72d3c {
+		font-size: 24rpx;
+		color: #FF6B35;
+		font-weight: bold;
+}
+.income-amount.data-v-07e72d3c {
+		display: flex;
+		align-items: baseline;
+		gap: 8rpx;
+		margin-bottom: 48rpx;
+}
+.currency.data-v-07e72d3c {
+		font-size: 48rpx;
+		font-weight: bold;
+		color: #333;
+}
+.amount.data-v-07e72d3c {
+		font-size: 80rpx;
+		font-weight: 900;
+		color: #333;
+		letter-spacing: -2rpx;
+}
+.income-footer.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+}
+.hours-badge.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 12rpx;
+		padding: 12rpx 24rpx;
+		background-color: rgba(255, 107, 53, 0.1);
+		border-radius: 48rpx;
+}
+.hours-text.data-v-07e72d3c {
+		font-size: 28rpx;
+		color: #FF6B35;
+		font-weight: 500;
+}
+.pending-section.data-v-07e72d3c {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 32rpx;
+		margin-bottom: 32rpx;
+}
+.pending-card.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 24rpx;
+		padding: 32rpx;
+		border-radius: 16rpx;
+		border-left: 8rpx solid;
+}
+.pending-card.data-v-07e72d3c:first-child {
+		border-left-color: #00B4D8;
+}
+.pending-card.data-v-07e72d3c:last-child {
+		border-left-color: #FF6B35;
+}
+.pending-icon.data-v-07e72d3c {
+		width: 80rpx;
+		height: 80rpx;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+}
+.pending-info.data-v-07e72d3c {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.pending-label.data-v-07e72d3c {
+		font-size: 24rpx;
+		color: #999;
+}
+.pending-value.data-v-07e72d3c {
+		font-size: 28rpx;
+		font-weight: bold;
+		color: #333;
+}
+.schedule-section.data-v-07e72d3c {
+		margin-top: 32rpx;
+}
+.section-header.data-v-07e72d3c {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 32rpx;
+}
+.section-title.data-v-07e72d3c {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.section-date.data-v-07e72d3c {
+		font-size: 24rpx;
+		color: #999;
+		background-color: rgba(0, 0, 0, 0.05);
+		padding: 8rpx 16rpx;
+		border-radius: 8rpx;
+}
+.class-card.data-v-07e72d3c {
+		background-color: #fff;
+		border-radius: 24rpx;
+		padding: 40rpx;
+		margin-bottom: 24rpx;
+		border: 2rpx solid rgba(255, 107, 53, 0.2);
+		position: relative;
+		overflow: hidden;
+}
+.active-class.data-v-07e72d3c {
+		border-color: #FF6B35;
+}
+.class-badge.data-v-07e72d3c {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: #FF6B35;
+		color: #fff;
+		font-size: 20rpx;
+		font-weight: bold;
+		padding: 8rpx 24rpx;
+		border-radius: 0 0 0 16rpx;
+		text-transform: uppercase;
+		letter-spacing: 2rpx;
+}
+.class-header.data-v-07e72d3c {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 32rpx;
+}
+.class-student.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 24rpx;
+		flex: 1;
+}
+.student-avatar.data-v-07e72d3c {
+		width: 96rpx;
+		height: 96rpx;
+		border-radius: 50%;
+		background-color: #f0f0f0;
+}
+.student-info.data-v-07e72d3c {
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.student-name.data-v-07e72d3c {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+}
+.course-name.data-v-07e72d3c {
+		font-size: 24rpx;
+		color: #999;
+}
+.class-time.data-v-07e72d3c {
+		text-align: right;
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.time-range.data-v-07e72d3c {
+		font-size: 28rpx;
+		font-weight: bold;
+		color: #FF6B35;
+}
+.time-left.data-v-07e72d3c,
+	.time-label.data-v-07e72d3c {
+		font-size: 20rpx;
+		color: #999;
+}
+.enter-btn.data-v-07e72d3c {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 16rpx;
+		padding: 24rpx;
+		border-radius: 16rpx;
+		border: none;
+}
+.enter-text.data-v-07e72d3c {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #fff;
+}
+.header-right-content.data-v-07e72d3c {
+		display: flex;
+		align-items: center;
+		gap: 16rpx;
+}
+.language-switch.data-v-07e72d3c {
+		padding: 8rpx 16rpx;
+}
+.lang-text.data-v-07e72d3c {
+		font-size: 28rpx;
+		color: #FF6B35;
+		font-weight: 600;
+}
+.icon-btn.data-v-07e72d3c {
+		position: relative;
+		padding: 8rpx;
+}
+.badge.data-v-07e72d3c {
+		position: absolute;
+		top: 4rpx;
+		right: 4rpx;
+		width: 16rpx;
+		height: 16rpx;
+		background-color: #ff4757;
+		border-radius: 50%;
+		border: 2px solid #fff;
+}

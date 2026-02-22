@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/mentors/mentors",
+    "pages/mentor-detail/mentor-detail",
+    "pages/booking/booking",
+    "pages/order-confirm/order-confirm",
+    "pages/success/success",
+    "pages/appointments/appointments",
+    "pages/messages/messages",
+    "pages/chat/chat",
+    "pages/profile/profile",
+    "pages/folder/folder",
+    "pages/settings/settings",
+    "pages/search/search",
+    "pages/login/login",
+    "pages/register/register"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Artris",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f6f8"
+  },
+  "usingComponents": {}
+}

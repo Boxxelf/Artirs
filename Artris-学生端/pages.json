@@ -1,0 +1,127 @@
+{
+	"pages": [
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "Artris",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mentors/mentors",
+			"style": {
+				"navigationBarTitleText": "导师库",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mentor-detail/mentor-detail",
+			"style": {
+				"navigationBarTitleText": "导师详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/booking/booking",
+			"style": {
+				"navigationBarTitleText": "选择预约时间",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/order-confirm/order-confirm",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/success/success",
+			"style": {
+				"navigationBarTitleText": "预约成功",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/appointments/appointments",
+			"style": {
+				"navigationBarTitleText": "我的预约",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/messages/messages",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"navigationBarTitleText": "聊天",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/folder/folder",
+			"style": {
+				"navigationBarTitleText": "申请资料夹",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/settings/settings",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Artris",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f5f6f8"
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	"uniIdRouter": {}
+}

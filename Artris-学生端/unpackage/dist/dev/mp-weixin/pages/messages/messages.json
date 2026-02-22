@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "消息",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "bottom-nav": "../../components/BottomNav/BottomNav"
+  }
+}

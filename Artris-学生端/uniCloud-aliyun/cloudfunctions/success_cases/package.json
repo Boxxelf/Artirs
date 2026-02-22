@@ -1,0 +1,8 @@
+{
+	"name": "success_cases",
+	"version": "1.0.0",
+	"dependencies": {},
+	"extensions": {
+		"uni-cloud-jql": {}
+	}
+}

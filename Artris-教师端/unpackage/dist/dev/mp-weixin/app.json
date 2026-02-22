@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/schedule/schedule",
+    "pages/earnings/earnings",
+    "pages/messages/messages",
+    "pages/profile/profile",
+    "pages/appointment-detail/appointment-detail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Artris Mentor",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f6f8"
+  },
+  "usingComponents": {}
+}

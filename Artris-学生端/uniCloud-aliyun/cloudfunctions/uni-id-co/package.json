@@ -1,0 +1,8 @@
+{
+	"name": "uni-id-co",
+	"version": "1.0.0",
+	"dependencies": {},
+	"extensions": {
+		"uni-cloud-jql": {}
+	}
+}

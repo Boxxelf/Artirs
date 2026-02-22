@@ -1,0 +1,43 @@
+{
+	"bsonType": "object",
+	"required": ["from_user_id", "to_user_id", "content"],
+	"permission": {
+		"read": "auth.uid == doc.from_user_id || auth.uid == doc.to_user_id || auth.uid != null",
+		"create": "auth.uid == doc.from_user_id || auth.uid != null",
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"from_user_id": {
+			"bsonType": "string",
+			"description": "发送者ID",
+			"label": "发送者"
+		},
+		"to_user_id": {
+			"bsonType": "string",
+			"description": "接收者ID",
+			"label": "接收者"
+		},
+		"content": {
+			"bsonType": "string",
+			"description": "消息内容",
+			"label": "内容"
+		},
+		"read": {
+			"bsonType": "bool",
+			"description": "是否已读",
+			"label": "已读状态",
+			"default": false
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

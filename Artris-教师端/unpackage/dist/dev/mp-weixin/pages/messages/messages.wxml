@@ -1,0 +1,1 @@
+<view class="messages-page data-v-ecc172b4"><header wx:if="{{a}}" class="data-v-ecc172b4" u-i="ecc172b4-0" bind:__l="__l" u-p="{{a}}"></header><view class="content data-v-ecc172b4"><view class="empty-state data-v-ecc172b4"><text class="empty-text data-v-ecc172b4">{{b}}</text></view></view><bottom-nav class="data-v-ecc172b4" u-i="ecc172b4-1" bind:__l="__l"></bottom-nav></view>

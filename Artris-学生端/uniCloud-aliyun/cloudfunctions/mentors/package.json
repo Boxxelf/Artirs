@@ -1,0 +1,8 @@
+{
+	"name": "mentors",
+	"version": "1.0.0",
+	"dependencies": {},
+	"extensions": {
+		"uni-cloud-jql": {}
+	}
+}

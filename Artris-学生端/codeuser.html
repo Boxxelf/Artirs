@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Artris - 遇见你的艺术导师</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d11e7",
+                        "accent-teal": "#2dd4bf",
+                        "mentor-teal": "#14b8a6",
+                        "artris-teal": "#0EA5E9",
+                        "success-teal": "#00bfa5",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Lexend', "PingFang SC", "Microsoft YaHei", sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .mesh-gradient {
+            background: linear-gradient(135deg, #2dd4bf 0%, #0d11e7 100%);
+        }
+        .video-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.6) 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-dark {
+            background: rgba(16, 16, 34, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Common Components ---
+        const BottomNav = () => {
+            const location = useLocation();
+            const getActive = (path) => location.pathname === path ? 'text-primary' : 'text-slate-400';
+            const getIcon = (path) => location.pathname === path ? 'fill-current' : '';
+
+            return (
+                <nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-slate-950/90 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-6 py-2 flex justify-between items-center z-[100]">
+                    <Link to="/" class={`flex flex-col items-center gap-1 group ${getActive('/')}`}>
+                        <span class={`material-symbols-outlined ${getIcon('/')}`}>home</span>
+                        <span class="text-[10px] font-bold">发现</span>
+                    </Link>
+                    <Link to="/mentors" class={`flex flex-col items-center gap-1 group ${getActive('/mentors')}`}>
+                        <span class={`material-symbols-outlined ${getIcon('/mentors')}`}>group</span>
+                        <span class="text-[10px] font-medium">导师库</span>
+                    </Link>
+                    <Link to="/appointments" class={`flex flex-col items-center gap-1 group ${getActive('/appointments')}`}>
+                        <span class={`material-symbols-outlined ${getIcon('/appointments')}`}>calendar_today</span>
+                        <span class="text-[10px] font-medium">预约</span>
+                    </Link>
+                    <Link to="/messages" class={`flex flex-col items-center gap-1 group ${getActive('/messages')}`}>
+                        <span class={`material-symbols-outlined ${getIcon('/messages')}`}>chat_bubble</span>
+                        <span class="text-[10px] font-medium">消息</span>
+                    </Link>
+                    <Link to="/profile" class={`flex flex-col items-center gap-1 group ${getActive('/profile')}`}>
+                        <span class={`material-symbols-outlined ${getIcon('/profile')}`}>person</span>
+                        <span class="text-[10px] font-medium">我的</span>
+                    </Link>
+                </nav>
+            );
+        };
+
+        // --- Screens ---
+
+        const HomePage = () => (
+            <div class="pb-24">
+                <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h1 class="text-2xl font-bold tracking-tight text-primary dark:text-white font-display">Artris</h1>
+                        <button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                            <span class="material-symbols-outlined text-2xl">notifications</span>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-slate-400">search</span>
+                        </div>
+                        <Link to="/search" class="block">
+                            <input class="block w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-900 border-none rounded-xl shadow-sm text-sm placeholder-slate-400 pointer-events-none" placeholder="搜索院校、专业或导师" readOnly type="text"/>
+                        </Link>
+                    </div>
+                </header>
+
+                <section class="px-4 py-2">
+                    <div class="relative overflow-hidden rounded-xl aspect-[16/9] flex items-center p-8 mesh-gradient shadow-xl">
+                        <div class="z-10 max-w-[70%]">
+                            <h2 class="text-white text-3xl font-bold leading-tight mb-3">遇见你的<br/>艺术导师</h2>
+                            <p class="text-white/80 text-sm mb-5">开启你的艺术名校之旅，一对一深度指导作品集。</p>
+                            <button class="bg-white text-primary px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg hover:scale-105 transition-transform">立即探索</button>
+                        </div>
+                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                    </div>
+                </section>
+
+                <section class="py-4">
+                    <div class="flex gap-3 px-4 overflow-x-auto hide-scrollbar">
+                        <button class="flex-none px-6 py-2 bg-primary text-white rounded-full text-sm font-medium">全部</button>
+                        <button class="flex-none px-6 py-2 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-800 rounded-full text-sm font-medium">插画</button>
+                        <button class="flex-none px-6 py-2 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-800 rounded-full text-sm font-medium">产品设计</button>
+                        <button class="flex-none px-6 py-2 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-800 rounded-full text-sm font-medium">建筑</button>
+                    </div>
+                </section>
+
+                <section class="py-6">
+                    <div class="flex items-center justify-between px-4 mb-4">
+                        <h3 class="text-xl font-bold font-display">精选导师</h3>
+                        <Link to="/mentors" class="text-primary text-sm font-medium flex items-center">
+                            全部导师 <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </Link>
+                    </div>
+                    <div class="flex gap-4 px-4 overflow-x-auto hide-scrollbar pb-4">
+                        <Link to="/mentor/1" class="flex-none w-72 glass-card rounded-xl p-5 shadow-sm">
+                            <div class="flex items-center gap-4 mb-4">
+                                <img class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBXywpOoA5-E5YqhfEjXvwuGw4nA5HlbMjf2QQgZjYocqg6QITkNpObvyFyNV-yjPujXrY7DLIWhgKycCKzsSET3wpwy2LwVlvKAuK1ZKgCPJji6BWMC8KnLB7R2ZxIUBrPCwBqLtLo7NgXMuhA04LXbm-xcFnbVxdgq0SP3Hm2z7fdk8aY0TNXDXPpAxwZtd0WJ9seh7t8uWKP5OT1NvEN_o2v-_c7P7-ZjLWHtF9ZHWZG6fJePGFZgdk4PI_XzpMiO3y5U34Gl6K"/>
+                                <div>
+                                    <h4 class="font-bold text-lg">Chen X.</h4>
+                                    <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-[10px] font-bold text-slate-500 uppercase">RISD MFA</div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-4 line-clamp-1">交互设计 | 4年教学经验</p>
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="flex items-center gap-1 text-amber-500"><span class="material-symbols-outlined text-sm fill-current">star</span><span class="text-sm font-bold">4.9</span></div>
+                                <div class="text-slate-900 dark:text-white font-bold text-sm"><span class="text-primary">¥380</span>/次</div>
+                            </div>
+                            <button class="w-full py-2.5 bg-accent-teal hover:bg-teal-500 text-white rounded-lg font-bold text-sm shadow-md transition-all">立即预约</button>
+                        </Link>
+                    </div>
+                </section>
+
+                <section class="py-6 px-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold font-display">成功案例</h3>
+                        <a class="text-primary text-sm font-medium flex items-center" href="#">更多录取 <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative group overflow-hidden rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800">
+                            <img class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMqXXC7d567dNE5iiBzO2e9SxyiLnLTB89eMf8-n5MMiegbUUIBPcDtiNf-9ExFtJoMrGh7nr08L7jaW-8eSXozzl7XS0Tz2plsc3zDwxWnpuL7Ji9lM9K1K-mD6omZU9sUTXM3ShkOLM-XoQQ3kxUI6SqDV0d3tTPgDGmOj8ZP5ThPrc5GbxW5TWIhjuBaYBaoXMBabZ-KTFQDa0SSnUSUqf1wx3WLcNmEmEhEOHqHQ8Te0lLtR40z4Fe9CcbkDwkp16A2Cd_Fs70"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4 w-full">
+                                <span class="inline-block px-2 py-0.5 bg-accent-teal text-[10px] text-white font-bold rounded mb-2">已录取 RISD MFA</span>
+                                <h5 class="text-white text-sm font-bold">Li Jing</h5>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <BottomNav />
+            </div>
+        );
+
+        const MentorList = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="pb-24">
+                    <header class="sticky top-0 z-50 bg-background-light/80 backdrop-blur-md px-4 pt-4 pb-2 border-b border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-2xl font-bold">school</span>
+                                <h1 class="text-xl font-bold tracking-tight">导师库</h1>
+                            </div>
+                            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
+                                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">search</span>
+                            </button>
+                        </div>
+                        <div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                            <button class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-slate-800 rounded-full border border-slate-100 dark:border-slate-700 whitespace-nowrap shadow-sm">
+                                <span class="text-sm font-medium">按价格</span>
+                                <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+                            </button>
+                        </div>
+                    </header>
+
+                    <main class="p-4 space-y-4">
+                        {[
+                            { name: "张老师", school: "伦敦大学学院 (UCL)", exp: "建筑学硕士", price: "500", rating: "4.9", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQS4qknQAQxIZcqENlQdcZPHKlh_26hTNdiCI8e4hi_4sXw5OjTWVm8s1kUd4NzL_kf4qWpkLs2F0PD98N_fX86iwhGbegwmElEk5YN3VeMA33Z0nL8QHGNjV-7P65gFm0t6oCMlmpp9CCBu7ZvVRpe9H-hb1ll6p2FSji7ED23Awpm0gnnLwUW7vACJIwrBBjUUBm-bhn0-Unc_Rht_nH-0lvbfCVtT2jnGD0jwwgLKwohub-k7hmMUSnKQyfQYbP3iUqSaHHjuGs" },
+                            { name: "李博士", school: "卡内基梅隆大学 (CMU)", exp: "计算机科学博士", price: "850", rating: "5.0", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBV3FYwpG6hKS2bvQtTAfXri3RoUhQe9pV5HIuOs4O6jEcl2E6idAt8IXAHFSCVDFD8pAOjFS4TEtOI78SIVweqCVQmIMP-WbCouqOBjeGw-bdPd0C2MVNzbc0h0vNVTGIbBWyLUmXwJ_rGR5jLfpTWkssp0QRdyLWFNN_VWFJSytpblhQDf0epvIsLfv61LnLILdhMvSpPC1f17BQxl-Btm93-6rq99HcNeHbTV8qRDRCWUTS0NsUitxU2-mOg6NgbihRHC-_4vtyP" }
+                        ].map((m, idx) => (
+                            <div key={idx} onClick={() => navigate('/mentor/1')} class="glass-card rounded-xl p-4 flex flex-col gap-4 shadow-sm active:scale-[0.98] transition-transform cursor-pointer">
+                                <div class="flex gap-4">
+                                    <img src={m.avatar} class="w-20 h-20 object-cover rounded-lg shadow-md" />
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-lg font-bold">{m.name}</h3>
+                                            <span class="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-0.5 rounded text-[10px] font-bold">本周可约</span>
+                                        </div>
+                                        <p class="text-sm text-slate-600 mt-1 font-medium">{m.school}</p>
+                                        <p class="text-xs text-slate-500">{m.exp}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between pt-3 border-t border-slate-200/50">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-orange-400 text-lg fill-current">star</span>
+                                        <span class="text-sm font-bold">{m.rating}</span>
+                                    </div>
+                                    <div class="flex items-baseline gap-1">
+                                        <span class="text-xl font-bold text-primary">¥{m.price}</span><span class="text-xs text-slate-500">/小时</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </main>
+                    <BottomNav />
+                </div>
+            )
+        }
+
+        const MentorDetail = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="pb-32 bg-white dark:bg-background-dark font-display">
+                    <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200/50">
+                        <button onClick={() => navigate(-1)} class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 transition-colors">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                        </button>
+                        <h1 class="text-sm font-semibold tracking-wide uppercase">导师详情</h1>
+                        <button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 transition-colors">
+                            <span class="material-symbols-outlined">share</span>
+                        </button>
+                    </nav>
+
+                    <header class="relative w-full pt-16">
+                        <div class="h-48 w-full bg-gradient-to-br from-primary via-indigo-600 to-purple-700 opacity-90"></div>
+                        <div class="px-6 -mt-16 relative flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full border-4 border-white dark:border-background-dark shadow-xl overflow-hidden bg-white">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpZ3IPOn6zBeWAw0sQf_zHuNq-vYZBkoiQNGicBRVrMlJbWHaWRvHO4f3Okpr3-QT-RJjYHIQd7x52KcC3pLdpu8TXlC-p2uzy4Z-adIkMUYbYej38m2AVaNFFMwjqtGuhOXWUbZZwF8xpVe-0V2yui9VnkQeO5TwzE5zjaM8iYfbccG4X1t1shupQrpGpNWOCROt6DjpEb8yQS0u4Y-TEt8Knh2TLyOk9f3rQh_LfguHEG-WQXfKX5LkutyG9sjtkbfyHvIH5tiFI" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h2 class="text-2xl font-bold">张老师 (Zhang Laoshi)</h2>
+                                <p class="text-primary font-semibold">RISD · MFA Degree</p>
+                            </div>
+                            <div class="flex gap-3 mt-6 w-full max-w-sm">
+                                <button class="flex-1 bg-primary text-white font-bold py-3 rounded-xl shadow-lg shadow-primary/20">关注</button>
+                                <button onClick={() => navigate('/chat/1')} class="flex-1 border border-slate-200 text-slate-900 font-bold py-3 rounded-xl bg-white">私信</button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="mt-10 px-6">
+                        <h3 class="text-lg font-bold mb-3">导师简介</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px]">
+                            深耕工业设计与交互设计多年，擅长作品集逻辑梳理与创意发掘。助力多名学生斩获 RISD、RCA 等顶尖艺术院校录取。
+                        </p>
+                    </section>
+
+                    <footer class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-slate-200 p-4 pb-8 z-50">
+                        <div class="max-w-4xl mx-auto flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Starting from</span>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-bold">¥380</span><span class="text-slate-500 text-sm">/次</span>
+                                </div>
+                            </div>
+                            <button onClick={() => navigate('/booking/1')} class="bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-xl font-bold shadow-lg shadow-primary/30 flex items-center gap-2">
+                                <span>立即预约</span> <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            </button>
+                        </div>
+                    </footer>
+                </div>
+            )
+        }
+
+        const BookingPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="min-h-screen flex flex-col font-display pb-32">
+                    <header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200">
+                        <div class="max-w-md mx-auto flex items-center justify-between px-4 h-16">
+                            <button onClick={() => navigate(-1)} class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 transition-colors">
+                                <span class="material-symbols-outlined">arrow_back</span>
+                            </button>
+                            <h1 class="text-lg font-bold">选择预约时间</h1>
+                            <div class="size-10"></div>
+                        </div>
+                    </header>
+                    <main class="flex-1 max-w-md mx-auto w-full px-4 py-6 space-y-8">
+                        <section>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold">2023年 10月</h3>
+                                <span class="material-symbols-outlined text-primary">calendar_month</span>
+                            </div>
+                            <div class="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
+                                <div class="flex flex-col items-center justify-center min-w-[64px] h-20 rounded-xl bg-primary text-white shadow-lg">
+                                    <span class="text-xs font-medium opacity-80">12 Mon</span>
+                                    <span class="text-xl font-bold">12</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center min-w-[64px] h-20 rounded-xl bg-white border border-slate-200">
+                                    <span class="text-xs font-medium text-slate-500">13 Tue</span>
+                                    <span class="text-xl font-bold">13</span>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="space-y-6">
+                            <div class="grid grid-cols-3 gap-3">
+                                <button class="py-3 rounded-lg text-sm font-medium bg-primary text-white ring-2 ring-primary ring-offset-2">14:00</button>
+                                <button class="py-3 rounded-lg text-sm font-medium bg-white border border-slate-200">15:00</button>
+                                <button class="py-3 rounded-lg text-sm font-medium bg-white border border-slate-200">16:00</button>
+                            </div>
+                        </section>
+                    </main>
+                    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-slate-200 px-4 py-6">
+                        <div class="max-w-md mx-auto">
+                            <button onClick={() => navigate('/order-confirm/1')} class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2">
+                                <span>下一步</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        const OrderConfirm = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="min-h-screen pb-32">
+                    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-4 py-4 flex items-center justify-between">
+                        <button onClick={() => navigate(-1)} class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 transition-colors">
+                            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+                        </button>
+                        <h1 class="text-lg font-bold">确认订单</h1>
+                        <div class="w-10"></div>
+                    </nav>
+                    <main class="max-w-md mx-auto p-4 space-y-6">
+                        <section class="glass-effect rounded-xl p-5 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqNpYFhY2-LByGdAUN-mfylmKMb31wo-ueYPYYCZxDMNam5ezHxP8TIDu2oHjxz86GDaKWUU6aXNy5ZZypOj8qqKrwmi4b3ftud8wvx8WAmibA9NpYmJjpkXjPnM0XM3rp-PJBBLUGwhesyDMixhATsiz4dscU_rf5jIp4eCG0D2JmBty4euVnaq5UQk9uqa25p8mLbqCYxAxmdNKrIuUTKJIrNOqhazqwT0IeYAh1qLrHN4c-yu_efHR6ZujJatIUFRNB16l_0xTI" class="w-16 h-16 rounded-lg object-cover" />
+                                <div class="flex-1">
+                                    <h2 class="text-lg font-bold">张老师 (Zhang Laoshi)</h2>
+                                    <p class="text-slate-600 text-sm">作品集指导 (Portfolio Guidance)</p>
+                                    <p class="text-slate-500 text-xs mt-2">2023-10-12 14:00-15:00</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="bg-white rounded-xl p-5 shadow-sm space-y-4">
+                            <div class="flex justify-between text-slate-600"><span>课程费用</span><span>¥380.00</span></div>
+                            <div class="flex justify-between text-rose-500 font-medium"><span>优惠券</span><span>-¥20.00</span></div>
+                            <hr class="border-slate-100" />
+                            <div class="flex justify-between items-center"><span class="font-bold">实付金额</span><span class="text-xl font-bold text-primary">¥360.00</span></div>
+                        </section>
+                    </main>
+                    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 pb-8 flex items-center justify-between max-w-md mx-auto z-50">
+                        <div class="flex flex-col"><span class="text-xs text-slate-400">合计金额</span><span class="text-2xl font-bold text-primary">¥360.00</span></div>
+                        <button onClick={() => navigate('/success')} class="bg-primary text-white font-bold py-3.5 px-10 rounded-full shadow-lg">立即支付</button>
+                    </footer>
+                </div>
+            )
+        }
+
+        const SuccessPage = () => {
+            const navigate = useNavigate();
+            return (
+                <main class="w-full max-w-md mx-auto min-h-screen flex flex-col items-center px-6 pt-12 pb-24 text-center">
+                    <div class="w-24 h-24 rounded-full bg-success-teal/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-success-teal text-6xl font-bold">check_circle</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">预约成功</h2>
+                    <p class="text-slate-500 text-sm px-4 mb-10">您已成功预约 张老师 的课程，请准时参加。</p>
+                    <div class="w-full flex flex-col gap-4 mt-auto">
+                        <button onClick={() => navigate('/appointments')} class="w-full py-4 bg-primary text-white font-semibold rounded-lg shadow-lg">查看预约</button>
+                        <button onClick={() => navigate('/')} class="w-full py-4 text-slate-500 font-medium rounded-lg">回到首页</button>
+                    </div>
+                </main>
+            )
+        }
+
+        const AppointmentsPage = () => (
+            <div class="flex flex-col min-h-screen pb-24">
+                <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+                    <div class="flex items-center justify-between px-4 py-3">
+                        <h1 class="text-lg font-bold">我的预约</h1>
+                    </div>
+                    <div class="flex px-4 border-b border-slate-100">
+                        <button class="flex-1 py-3 text-sm font-semibold text-primary border-b-2 border-primary">即将开始</button>
+                        <button class="flex-1 py-3 text-sm font-medium text-slate-500">已完成</button>
+                    </div>
+                </header>
+                <main class="flex-1 px-4 py-5 space-y-4">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBltugDH_7SyjjTaamAuMJffU8r5e89IKbSoPTAE6ZaKMNWv4ettR1U_bCMiB8cjjZtvpLkBTKyQZ1g1XwHfxcSRQ5RT3qo6EBT7KS0MiI7b_0elKfvSCViXMzuL9-YiUw7m6IswHHLbxF04f_HD7nDLrENL8QdTt1j7iuq6toXdbe7iWSTjlRROt2o5pOZ0IoxvOjssSvYdCfFqVZfPYBUkeujpzNwqIWOXRvFdA05OUNCmOIU1BqbdrkmRdT_MCCJrySpNaFdhDGc" class="w-12 h-12 rounded-full" />
+                                <div><h3 class="font-bold">张老师</h3><p class="text-xs text-slate-500">UI/UX 专家</p></div>
+                            </div>
+                            <span class="bg-primary/10 text-primary text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">即将开始</span>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-3">
+                            <h4 class="font-semibold text-sm">UI设计进阶课程</h4>
+                            <div class="flex items-center gap-4 text-xs text-slate-600 mt-2">
+                                <span>2024-05-20</span><span>14:00 - 15:00</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end pt-2">
+                            <Link to="/classroom/1" class="px-4 py-2 text-xs font-semibold text-white bg-mentor-teal rounded-lg flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">video_call</span> 进入课堂
+                            </Link>
+                        </div>
+                    </div>
+                </main>
+                <BottomNav />
+            </div>
+        )
+
+        const ClassroomPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="relative h-screen w-full flex flex-col bg-black">
+                    <div class="absolute inset-0 z-0 bg-cover bg-center" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvgH_4sPhuNNqKe9REsQ-Xa61NaqRvmF0UIdvV8pLyDGmp0NZTqCI0iOYBoFgZ4j4HAcNZ_97N-h89sQbiThqJo8xHho99pGh79nfSL1rlJvD_I1HStTrthE_auaU8t0dr4xUY3TCyqSlSo1t3-zdjWj1oVarzO8JZLaUFnO9vcRx2pYhzkls_N-5PC4oSsyDxbMkBpGAzym-OtjE6uMXNRx6SsG24BhmT5fhVkrqiZrNFQGcJZaymdXt7e7QTKrEbKJAclpwpuK90')"}}>
+                        <div class="absolute inset-0 video-gradient"></div>
+                    </div>
+                    <div class="relative z-10 flex items-center justify-between p-4 pt-8">
+                        <div class="flex items-center gap-3 glass-dark px-4 py-2 rounded-full">
+                            <span class="text-white text-sm font-medium">直播中</span>
+                            <span class="text-white font-bold">张老师</span>
+                        </div>
+                        <div class="glass-dark px-4 py-2 rounded-full text-white">00:45:12</div>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <div class="relative z-10 p-6 pb-20">
+                        <div class="glass-dark rounded-2xl p-4 flex flex-col gap-6">
+                            <div class="flex justify-between items-center gap-4">
+                                <button class="flex-1 h-14 rounded-xl flex items-center justify-center bg-artris-teal text-white">静音</button>
+                                <button class="flex-1 h-14 rounded-xl flex items-center justify-center bg-artris-teal text-white">摄像头</button>
+                                <button onClick={() => navigate(-1)} class="w-20 h-14 rounded-xl flex items-center justify-center bg-red-500 text-white">离开</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        const MessagesPage = () => (
+            <div class="h-screen flex flex-col bg-white">
+                <header class="p-4 pt-6 bg-white border-b">
+                    <h1 class="text-2xl font-bold">消息</h1>
+                </header>
+                <main class="flex-1 overflow-y-auto px-4 pb-24">
+                    <Link to="/chat/1" class="flex items-center gap-4 py-4 border-b">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5-L9TYu1iV-USIvs___cMYsHC2u2CDZVNjaUy7BWMX7CMv4ou4s3Ss0lTbf8i8IxsaMvDaT9MZNPGCxZjVZ3Ayee4G-UxIM716rn81iS6IO-QzUt-4L2qhfNxlBmAYIfQSNtHXeVN5E5lSRaQICVd5oemKr2LjF5PHLd5ep6jtq0a3bfYUp5xUkLqdUoan0g3TWiSsAKOFAymRAxwSsOqpb8-uKPEtnG0buYQ410uGQRQoiEJQCb_Jh8GRINDMmdPNz6RmdWODrq0" class="w-14 h-14 rounded-full" />
+                        <div class="flex-1">
+                            <div class="flex justify-between"><strong>张老师</strong><span class="text-xs text-slate-400">14:30</span></div>
+                            <p class="text-sm text-slate-500 line-clamp-1">关于下周的作品集指导...</p>
+                        </div>
+                    </Link>
+                </main>
+                <BottomNav />
+            </div>
+        )
+
+        const ChatPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="flex flex-col h-screen bg-background-light">
+                    <header class="glass-header h-16 flex items-center px-4 border-b sticky top-0 bg-white/80">
+                        <button onClick={() => navigate(-1)} class="p-2"><span class="material-symbols-outlined">arrow_back</span></button>
+                        <div class="flex-1 text-center font-bold">张老师</div>
+                        <button class="p-2"><span class="material-symbols-outlined">more_horiz</span></button>
+                    </header>
+                    <main class="flex-1 p-4 space-y-6 overflow-y-auto">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-white p-3 rounded-xl rounded-tl-none shadow-sm text-sm max-w-[80%]">老师您好！</div>
+                        </div>
+                        <div class="flex items-start gap-3 justify-end">
+                            <div class="bg-mentor-teal text-white p-3 rounded-xl rounded-tr-none shadow-md text-sm max-w-[80%]">你好！</div>
+                        </div>
+                    </main>
+                    <footer class="bg-white p-4 pb-8 flex items-center gap-3 border-t">
+                        <input class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2" placeholder="输入消息..." />
+                        <button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center"><span class="material-symbols-outlined">add</span></button>
+                    </footer>
+                </div>
+            )
+        }
+
+        const ProfilePage = () => (
+            <div class="flex-1 pb-24 bg-background-light">
+                <header class="bg-white p-6 pt-12 text-center relative">
+                    <div class="flex justify-end mb-4"><Link to="/settings"><span class="material-symbols-outlined">settings</span></Link></div>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0_hwpeAnQd3DCsGVy3FZwy1GuGEtQIHVbov-7-T885RafL6e7riWmSM2ZdxieBbp7iOBl2uiGeFU2KjH84j-QNsaVMN411hSMWIbEg-EjXoAXf4nhTgqPZ1kmJfIrw1UJPRpQ1ZTDS7qg4IvCLtE9eiLjSlRNozGDFj_9HKnpXCudtXUgzQqCgdzn7vYK7DItb4fGr-2WbduZnBLhFLQrPN_JbTgqsz8FYu84a2Gi1K6IbAPgGWExvVEhR8pwXtvvf6jG-K9fBE8v" class="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-xl mb-4" />
+                    <h2 class="text-2xl font-bold">张小凡</h2>
+                    <p class="text-slate-500">Rhode Island School of Design</p>
+                </header>
+                <div class="grid grid-cols-3 gap-4 px-6 mt-6">
+                    <div class="bg-white p-4 rounded-xl text-center shadow-sm"><strong>48</strong><p class="text-xs text-slate-500">累计课时</p></div>
+                    <div class="bg-white p-4 rounded-xl text-center shadow-sm"><strong>12</strong><p class="text-xs text-slate-500">收藏导师</p></div>
+                    <div class="bg-white p-4 rounded-xl text-center shadow-sm"><strong>8</strong><p class="text-xs text-slate-500">完成评价</p></div>
+                </div>
+                <div class="px-6 mt-8 space-y-3">
+                    <Link to="/folder" class="flex items-center p-4 bg-white rounded-xl shadow-sm"><span class="material-symbols-outlined mr-4 text-primary">folder_shared</span><span class="flex-1 font-medium">申请资料夹</span><span class="material-symbols-outlined text-slate-300">chevron_right</span></Link>
+                    <div class="flex items-center p-4 bg-white rounded-xl shadow-sm"><span class="material-symbols-outlined mr-4 text-primary">favorite</span><span class="flex-1 font-medium">我的收藏</span><span class="material-symbols-outlined text-slate-300">chevron_right</span></div>
+                </div>
+                <BottomNav />
+            </div>
+        )
+
+        const FolderPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="flex-1 pb-32">
+                    <header class="p-4 h-16 flex items-center border-b bg-white sticky top-0 z-10">
+                        <button onClick={() => navigate(-1)} class="p-2"><span class="material-symbols-outlined">arrow_back</span></button>
+                        <h1 class="flex-1 text-center font-bold">申请资料夹</h1>
+                    </header>
+                    <main class="p-4 space-y-8">
+                        <section class="bg-white p-5 rounded-xl border">
+                            <h3 class="font-bold">RISD (罗德岛设计学院)</h3>
+                            <div class="w-full bg-slate-100 h-2.5 rounded-full mt-3 overflow-hidden">
+                                <div class="bg-primary h-full w-[85%]"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">申请材料处理中 · 剩余 12 天截止</p>
+                        </section>
+                        <section class="space-y-3">
+                            <h2 class="font-bold text-lg">申请清单</h2>
+                            <div class="p-4 bg-white border rounded-xl flex justify-between items-center">
+                                <div><p class="font-bold">作品集</p><p class="text-xs text-slate-500">已完成 80%</p></div>
+                                <span class="material-symbols-outlined text-primary">pending</span>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            )
+        }
+
+        const SettingsPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="min-h-screen bg-white">
+                    <header class="p-4 h-16 flex items-center border-b sticky top-0 bg-white">
+                        <button onClick={() => navigate(-1)} class="p-2"><span class="material-symbols-outlined">arrow_back</span></button>
+                        <h1 class="font-bold ml-2">设置</h1>
+                    </header>
+                    <main class="p-4 space-y-6">
+                        <div class="bg-slate-50 rounded-xl p-4 space-y-4">
+                            <div class="flex justify-between items-center"><span class="font-medium">通知设置</span><div class="w-12 h-6 bg-primary rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div></div>
+                        </div>
+                        <button onClick={() => navigate('/')} class="w-full py-4 text-red-500 font-bold border rounded-xl">退出登录</button>
+                    </main>
+                </div>
+            )
+        }
+
+        const SearchPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div class="bg-background-light min-h-screen">
+                    <header class="p-4 bg-white sticky top-0 flex items-center gap-3 border-b">
+                        <button onClick={() => navigate(-1)} class="p-2"><span class="material-symbols-outlined">arrow_back</span></button>
+                        <input class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm" placeholder="插画" defaultValue="插画" />
+                        <button class="bg-primary text-white px-4 py-2 rounded-full text-sm font-bold">搜索</button>
+                    </header>
+                    <main class="p-4">
+                        <div class="flex items-center justify-between py-4"><span class="text-xs text-slate-500">找到 24 位导师</span></div>
+                        <div onClick={() => navigate('/mentor/1')} class="glass-card rounded-xl p-4 flex gap-4 mb-4">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqrdAH5bmaoXS9w7q_7X6pSpgavi9wHkOiunOw-ueQDCEVyXffs46W7q4pv9lJWM-7B_e5uc5QExwvLE0wTYBZWbPKswwTzXbJ686O4ARiwAl8lFlDc-BgRYSXm-bMcVjlEnikyCbwKOw1Yze2X1U9_eQt5Ra_oFXaNidns8-ZRY4Qw8vAlSFcb8EbFZBpPDToC56LGmbwlNBN34aSLbZ0meoaL-6uvg4XMR5W92uVPM2S8YGf8C7vtz8-mpNzPok7YJEevKLM46aF" class="w-16 h-16 rounded-full" />
+                            <div class="flex-1">
+                                <h3 class="font-bold">张晓雅</h3>
+                                <p class="text-xs text-slate-500">RISD · 插画 MFA</p>
+                                <div class="flex justify-between mt-2"><span class="text-primary font-bold">¥380/次</span><button class="px-3 py-1 bg-primary text-white text-xs rounded-full">预约</button></div>
+                            </div>
+                        </div>
+                    </main>
+                    <BottomNav />
+                </div>
+            )
+        }
+
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/mentors" element={<MentorList />} />
+                        <Route path="/mentor/:id" element={<MentorDetail />} />
+                        <Route path="/booking/:id" element={<BookingPage />} />
+                        <Route path="/order-confirm/:id" element={<OrderConfirm />} />
+                        <Route path="/success" element={<SuccessPage />} />
+                        <Route path="/appointments" element={<AppointmentsPage />} />
+                        <Route path="/classroom/:id" element={<ClassroomPage />} />
+                        <Route path="/messages" element={<MessagesPage />} />
+                        <Route path="/chat/:id" element={<ChatPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/folder" element={<FolderPage />} />
+                        <Route path="/settings" element={<SettingsPage />} />
+                        <Route path="/search" element={<SearchPage />} />
+                    </Routes>
+                </MemoryRouter>
+            );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

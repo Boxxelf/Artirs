@@ -1,0 +1,57 @@
+{
+	"pages": [
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "Artris",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/schedule/schedule",
+			"style": {
+				"navigationBarTitleText": "课表",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/earnings/earnings",
+			"style": {
+				"navigationBarTitleText": "收入",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/messages/messages",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/appointment-detail/appointment-detail",
+			"style": {
+				"navigationBarTitleText": "预约详情",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Artris Mentor",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f5f6f8"
+	},
+	"uniIdRouter": {}
+}

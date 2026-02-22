@@ -1,0 +1,135 @@
+
+.booking-page.data-v-d331dabb {
+		min-height: 100vh;
+		background-color: #f5f6f8;
+		padding-bottom: 160rpx;
+}
+.navbar.data-v-d331dabb {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx 32rpx;
+		background: rgba(255, 255, 255, 0.95);
+		-webkit-backdrop-filter: blur(10px);
+		        backdrop-filter: blur(10px);
+		border-bottom: 1px solid #e5e5e5;
+		z-index: 100;
+}
+.nav-title.data-v-d331dabb {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.nav-placeholder.data-v-d331dabb {
+		width: 48rpx;
+}
+.content.data-v-d331dabb {
+		padding: 48rpx 32rpx;
+}
+.date-section.data-v-d331dabb {
+		margin-bottom: 64rpx;
+}
+.section-header.data-v-d331dabb {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 32rpx;
+}
+.section-title.data-v-d331dabb {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.date-scroll.data-v-d331dabb {
+		white-space: nowrap;
+}
+.date-item.data-v-d331dabb {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-width: 128rpx;
+		height: 160rpx;
+		background-color: #ffffff;
+		border: 1px solid #e5e5e5;
+		border-radius: 24rpx;
+		margin-right: 24rpx;
+}
+.date-item.active.data-v-d331dabb {
+		background-color: #00B4D8;
+		border-color: #00B4D8;
+}
+.date-weekday.data-v-d331dabb {
+		font-size: 24rpx;
+		color: #999;
+		margin-bottom: 8rpx;
+}
+.date-item.active .date-weekday.data-v-d331dabb {
+		color: rgba(255, 255, 255, 0.8);
+}
+.date-day.data-v-d331dabb {
+		font-size: 40rpx;
+		font-weight: bold;
+		color: #333;
+}
+.date-item.active .date-day.data-v-d331dabb {
+		color: #ffffff;
+}
+.time-section.data-v-d331dabb {
+}
+.time-grid.data-v-d331dabb {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24rpx;
+}
+.time-item.data-v-d331dabb {
+		padding: 24rpx;
+		background-color: #ffffff;
+		border: 1px solid #e5e5e5;
+		border-radius: 16rpx;
+		text-align: center;
+		font-size: 28rpx;
+		color: #666;
+}
+.time-item.active.data-v-d331dabb {
+		background-color: #00B4D8;
+		border-color: #00B4D8;
+		color: #ffffff;
+		box-shadow: 0 4rpx 12rpx rgba(0, 180, 216, 0.3);
+}
+.footer-bar.data-v-d331dabb {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: rgba(255, 255, 255, 0.95);
+		-webkit-backdrop-filter: blur(12px);
+		        backdrop-filter: blur(12px);
+		border-top: 1px solid #e5e5e5;
+		padding: 32rpx;
+		padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+.next-btn.data-v-d331dabb {
+		width: 100%;
+		background-color: #00B4D8;
+		color: #ffffff;
+		border: none;
+		border-radius: 24rpx;
+		padding: 32rpx;
+		font-size: 32rpx;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 16rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 180, 216, 0.3);
+}
+.next-btn[disabled].data-v-d331dabb {
+		background-color: #ccc;
+		box-shadow: none;
+}

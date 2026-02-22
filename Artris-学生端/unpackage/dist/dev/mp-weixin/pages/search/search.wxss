@@ -1,0 +1,105 @@
+
+.search-page.data-v-c10c040c {
+		min-height: 100vh;
+		background-color: #f5f6f8;
+		padding-bottom: 120rpx;
+}
+.search-bar.data-v-c10c040c {
+		display: flex;
+		align-items: center;
+		gap: 16rpx;
+		padding: 24rpx 32rpx;
+		background-color: #ffffff;
+		border-bottom: 1px solid #e5e5e5;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+}
+.search-input.data-v-c10c040c {
+		flex: 1;
+		background-color: #f5f6f8;
+		border: none;
+		border-radius: 50rpx;
+		padding: 16rpx 32rpx;
+		font-size: 28rpx;
+}
+.search-btn.data-v-c10c040c {
+		background-color: #00B4D8;
+		color: #ffffff;
+		border: none;
+		border-radius: 50rpx;
+		padding: 16rpx 32rpx;
+		font-size: 28rpx;
+		font-weight: bold;
+}
+.search-results.data-v-c10c040c {
+		padding: 32rpx;
+}
+.results-header.data-v-c10c040c {
+		margin-bottom: 32rpx;
+}
+.results-count.data-v-c10c040c {
+		font-size: 24rpx;
+		color: #999;
+}
+.mentor-list.data-v-c10c040c {
+}
+.mentor-item.data-v-c10c040c {
+		background: rgba(255, 255, 255, 0.9);
+		-webkit-backdrop-filter: blur(12px);
+		        backdrop-filter: blur(12px);
+		border-radius: 24rpx;
+		padding: 32rpx;
+		margin-bottom: 32rpx;
+		display: flex;
+		gap: 32rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.mentor-avatar.data-v-c10c040c {
+		width: 128rpx;
+		height: 128rpx;
+		border-radius: 50%;
+}
+.mentor-info.data-v-c10c040c {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.mentor-name.data-v-c10c040c {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+}
+.mentor-school.data-v-c10c040c {
+		font-size: 24rpx;
+		color: #999;
+}
+.mentor-footer.data-v-c10c040c {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 16rpx;
+}
+.mentor-price.data-v-c10c040c {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #00B4D8;
+}
+.book-btn.data-v-c10c040c {
+		background-color: #00B4D8;
+		color: #ffffff;
+		border: none;
+		border-radius: 50rpx;
+		padding: 12rpx 32rpx;
+		font-size: 24rpx;
+		font-weight: bold;
+}
+.loading.data-v-c10c040c, .empty.data-v-c10c040c {
+		text-align: center;
+		padding: 64rpx;
+		color: #999;
+		font-size: 28rpx;
+}
+

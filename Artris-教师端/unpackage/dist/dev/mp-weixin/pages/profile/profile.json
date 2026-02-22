@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "header": "../../components/Header/Header",
+    "bottom-nav": "../../components/BottomNav/BottomNav"
+  }
+}

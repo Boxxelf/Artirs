@@ -1,0 +1,149 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "search": "搜索",
+    "filter": "筛选",
+    "all": "全部",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "submit": "提交",
+    "close": "关闭",
+    "yes": "是",
+    "no": "否"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "email": "邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "forgotPassword": "忘记密码？",
+    "loginAsStudent": "学生登录",
+    "loginAsTeacher": "教师登录",
+    "registerAsStudent": "学生注册",
+    "registerAsTeacher": "教师注册",
+    "alreadyHaveAccount": "已有账号？",
+    "dontHaveAccount": "还没有账号？",
+    "name": "姓名",
+    "role": "角色"
+  },
+  "student": {
+    "home": {
+      "title": "找到您的完美导师",
+      "subtitle": "与顶尖艺术院校校友和行业专业人士建立联系",
+      "exploreNow": "立即探索",
+      "featuredMentors": "精选导师",
+      "allMentors": "查看全部",
+      "successCases": "成功案例",
+      "categories": {
+        "all": "全部",
+        "illustration": "插画",
+        "product": "产品设计",
+        "architecture": "建筑",
+        "graphic": "平面设计",
+        "animation": "动画",
+        "fashion": "时装设计"
+      }
+    },
+    "mentors": {
+      "title": "导师库",
+      "availableThisWeek": "本周可约",
+      "pricePerHour": "/小时",
+      "bookNow": "立即预约",
+      "viewProfile": "查看资料",
+      "yearsExperience": "年经验",
+      "reviews": "条评价",
+      "specialties": "专业领域",
+      "education": "教育背景",
+      "experience": "工作经历",
+      "about": "关于",
+      "portfolio": "作品集",
+      "selectTime": "选择时间",
+      "selectDuration": "选择时长",
+      "addNote": "添加备注（可选）",
+      "totalPrice": "总价",
+      "confirmBooking": "确认预约"
+    },
+    "appointments": {
+      "title": "我的预约",
+      "upcoming": "即将开始",
+      "past": "历史记录",
+      "cancelled": "已取消",
+      "noAppointments": "暂无预约",
+      "viewDetails": "查看详情",
+      "cancel": "取消预约",
+      "joinSession": "进入课堂",
+      "status": {
+        "pending": "待确认",
+        "confirmed": "已确认",
+        "completed": "已完成",
+        "cancelled": "已取消"
+      }
+    },
+    "messages": {
+      "title": "消息",
+      "noMessages": "暂无消息",
+      "typeMessage": "输入消息...",
+      "send": "发送"
+    },
+    "profile": {
+      "title": "个人中心",
+      "myPortfolio": "我的作品集",
+      "settings": "设置",
+      "help": "帮助与支持"
+    }
+  },
+  "teacher": {
+    "home": {
+      "title": "教师仪表板",
+      "welcome": "欢迎回来",
+      "todayAppointments": "今日预约",
+      "pendingRequests": "待处理请求",
+      "totalEarnings": "总收入",
+      "thisMonth": "本月",
+      "viewAll": "查看全部"
+    },
+    "schedule": {
+      "title": "课表",
+      "calendar": "日历",
+      "list": "列表视图",
+      "noAppointments": "暂无预约",
+      "accept": "接受",
+      "reject": "拒绝"
+    },
+    "earnings": {
+      "title": "收入",
+      "total": "总收入",
+      "thisMonth": "本月",
+      "lastMonth": "上月",
+      "transactions": "交易记录",
+      "date": "日期",
+      "student": "学生",
+      "duration": "时长",
+      "amount": "金额"
+    },
+    "verification": {
+      "title": "学历认证",
+      "status": "认证状态",
+      "verified": "已认证",
+      "pending": "审核中",
+      "rejected": "已拒绝",
+      "uploadDiploma": "上传毕业证书",
+      "uploadTranscript": "上传成绩单",
+      "school": "学校名称",
+      "degree": "学位",
+      "major": "专业",
+      "graduationYear": "毕业年份",
+      "submit": "提交认证"
+    }
+  }
+}

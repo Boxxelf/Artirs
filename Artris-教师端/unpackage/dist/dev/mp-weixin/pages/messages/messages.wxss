@@ -1,0 +1,19 @@
+
+.messages-page.data-v-ecc172b4 {
+		min-height: 100vh;
+		padding-bottom: 200rpx;
+		background-color: #f5f6f8;
+}
+.content.data-v-ecc172b4 {
+		padding: 32rpx;
+}
+.empty-state.data-v-ecc172b4 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 60vh;
+}
+.empty-text.data-v-ecc172b4 {
+		font-size: 28rpx;
+		color: #999;
+}

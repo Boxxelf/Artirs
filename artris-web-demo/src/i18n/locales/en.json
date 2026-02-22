@@ -1,0 +1,149 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "loginAsStudent": "Login as Student",
+    "loginAsTeacher": "Login as Teacher",
+    "registerAsStudent": "Register as Student",
+    "registerAsTeacher": "Register as Teacher",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "name": "Name",
+    "role": "Role"
+  },
+  "student": {
+    "home": {
+      "title": "Find Your Perfect Mentor",
+      "subtitle": "Connect with top art school alumni and industry professionals",
+      "exploreNow": "Explore Now",
+      "featuredMentors": "Featured Mentors",
+      "allMentors": "View All",
+      "successCases": "Success Stories",
+      "categories": {
+        "all": "All",
+        "illustration": "Illustration",
+        "product": "Product Design",
+        "architecture": "Architecture",
+        "graphic": "Graphic Design",
+        "animation": "Animation",
+        "fashion": "Fashion Design"
+      }
+    },
+    "mentors": {
+      "title": "Mentors",
+      "availableThisWeek": "Available",
+      "pricePerHour": "/hour",
+      "bookNow": "Book Now",
+      "viewProfile": "View Profile",
+      "yearsExperience": "years experience",
+      "reviews": "reviews",
+      "specialties": "Specialties",
+      "education": "Education",
+      "experience": "Experience",
+      "about": "About",
+      "portfolio": "Portfolio",
+      "selectTime": "Select Time",
+      "selectDuration": "Select Duration",
+      "addNote": "Add Note (Optional)",
+      "totalPrice": "Total Price",
+      "confirmBooking": "Confirm Booking"
+    },
+    "appointments": {
+      "title": "My Appointments",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "cancelled": "Cancelled",
+      "noAppointments": "No appointments yet",
+      "viewDetails": "View Details",
+      "cancel": "Cancel Appointment",
+      "joinSession": "Join Session",
+      "status": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "messages": {
+      "title": "Messages",
+      "noMessages": "No messages yet",
+      "typeMessage": "Type a message...",
+      "send": "Send"
+    },
+    "profile": {
+      "title": "Profile",
+      "myPortfolio": "My Portfolio",
+      "settings": "Settings",
+      "help": "Help & Support"
+    }
+  },
+  "teacher": {
+    "home": {
+      "title": "Teacher Dashboard",
+      "welcome": "Welcome back",
+      "todayAppointments": "Today's Appointments",
+      "pendingRequests": "Pending Requests",
+      "totalEarnings": "Total Earnings",
+      "thisMonth": "This Month",
+      "viewAll": "View All"
+    },
+    "schedule": {
+      "title": "Schedule",
+      "calendar": "Calendar",
+      "list": "List View",
+      "noAppointments": "No appointments scheduled",
+      "accept": "Accept",
+      "reject": "Reject"
+    },
+    "earnings": {
+      "title": "Earnings",
+      "total": "Total Earnings",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "transactions": "Transactions",
+      "date": "Date",
+      "student": "Student",
+      "duration": "Duration",
+      "amount": "Amount"
+    },
+    "verification": {
+      "title": "Education Verification",
+      "status": "Verification Status",
+      "verified": "Verified",
+      "pending": "Pending Review",
+      "rejected": "Rejected",
+      "uploadDiploma": "Upload Diploma",
+      "uploadTranscript": "Upload Transcript",
+      "school": "School Name",
+      "degree": "Degree",
+      "major": "Major",
+      "graduationYear": "Graduation Year",
+      "submit": "Submit for Verification"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+	"bsonType": "object",
+	"required": ["username", "email", "password"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": "auth.uid == doc._id || auth.uid != null",
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"username": {
+			"bsonType": "string",
+			"description": "用户名",
+			"label": "用户名"
+		},
+		"email": {
+			"bsonType": "string",
+			"description": "邮箱",
+			"label": "邮箱"
+		},
+		"password": {
+			"bsonType": "string",
+			"description": "密码（加密后）",
+			"label": "密码"
+		},
+		"nickname": {
+			"bsonType": "string",
+			"description": "昵称",
+			"label": "昵称"
+		},
+		"avatar_file": {
+			"bsonType": "object",
+			"description": "头像文件",
+			"properties": {
+				"url": {
+					"bsonType": "string",
+					"description": "头像URL"
+				}
+			}
+		},
+		"extend": {
+			"bsonType": "object",
+			"description": "扩展信息",
+			"properties": {
+				"school": {
+					"bsonType": "string",
+					"description": "学校"
+				}
+			}
+		},
+		"status": {
+			"bsonType": "number",
+			"description": "状态：0-正常，1-禁用",
+			"default": 0
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"update_date": {
+			"bsonType": "timestamp",
+			"description": "更新时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

@@ -1,0 +1,99 @@
+
+.folder-page.data-v-d1c75cef {
+		min-height: 100vh;
+		background-color: #f5f6f8;
+		padding-bottom: 32rpx;
+}
+.navbar.data-v-d1c75cef {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx 32rpx;
+		background: rgba(255, 255, 255, 0.95);
+		-webkit-backdrop-filter: blur(10px);
+		        backdrop-filter: blur(10px);
+		border-bottom: 1px solid #e5e5e5;
+		z-index: 100;
+}
+.nav-title.data-v-d1c75cef {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.nav-placeholder.data-v-d1c75cef {
+		width: 48rpx;
+}
+.content.data-v-d1c75cef {
+		padding: 32rpx;
+}
+.application-card.data-v-d1c75cef {
+		background-color: #ffffff;
+		border-radius: 24rpx;
+		padding: 40rpx;
+		margin-bottom: 32rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.school-name.data-v-d1c75cef {
+		display: block;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 24rpx;
+}
+.progress-bar.data-v-d1c75cef {
+		width: 100%;
+		height: 10rpx;
+		background-color: #f0f0f0;
+		border-radius: 50rpx;
+		overflow: hidden;
+		margin-bottom: 16rpx;
+}
+.progress-fill.data-v-d1c75cef {
+		height: 100%;
+		background-color: #00B4D8;
+		border-radius: 50rpx;
+		transition: width 0.3s;
+}
+.progress-text.data-v-d1c75cef {
+		font-size: 24rpx;
+		color: #999;
+}
+.materials-section.data-v-d1c75cef {
+		margin-top: 48rpx;
+}
+.section-title.data-v-d1c75cef {
+		display: block;
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 24rpx;
+}
+.material-item.data-v-d1c75cef {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #ffffff;
+		border: 1px solid #e5e5e5;
+		border-radius: 24rpx;
+		padding: 32rpx;
+		margin-bottom: 24rpx;
+}
+.material-info.data-v-d1c75cef {
+		display: flex;
+		flex-direction: column;
+		gap: 8rpx;
+}
+.material-name.data-v-d1c75cef {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+}
+.material-progress.data-v-d1c75cef {
+		font-size: 24rpx;
+		color: #999;
+}

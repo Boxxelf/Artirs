@@ -1,0 +1,105 @@
+
+.chat-page.data-v-0a633310 {
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		background-color: #f5f6f8;
+		overflow: hidden;
+}
+.navbar.data-v-0a633310 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx 32rpx;
+		padding-top: calc(20rpx + env(safe-area-inset-top));
+		background: rgba(255, 255, 255, 0.95);
+		-webkit-backdrop-filter: blur(10px);
+		        backdrop-filter: blur(10px);
+		border-bottom: 1px solid #e5e5e5;
+		flex-shrink: 0;
+}
+.nav-title.data-v-0a633310 {
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+}
+.message-list.data-v-0a633310 {
+		flex: 1;
+		padding: 32rpx;
+		overflow-y: auto;
+		box-sizing: border-box;
+		min-height: 0;
+}
+.message-item.data-v-0a633310 {
+		margin-bottom: 32rpx;
+		display: flex;
+}
+.message-item.message-right.data-v-0a633310 {
+		justify-content: flex-end;
+}
+.message-bubble.data-v-0a633310 {
+		max-width: 60%;
+		background-color: #ffffff;
+		border-radius: 24rpx;
+		border-top-left-radius: 0;
+		padding: 24rpx;
+		box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+		word-wrap: break-word;
+		word-break: break-all;
+}
+.bubble-right.data-v-0a633310 {
+		background-color: #14b8a6;
+		border-top-left-radius: 24rpx;
+		border-top-right-radius: 0;
+}
+.message-text.data-v-0a633310 {
+		font-size: 28rpx;
+		color: #333;
+		line-height: 1.5;
+		word-wrap: break-word;
+		word-break: break-all;
+}
+.bubble-right .message-text.data-v-0a633310 {
+		color: #ffffff;
+}
+.input-bar.data-v-0a633310 {
+		display: flex;
+		align-items: center;
+		gap: 16rpx;
+		padding: 24rpx 32rpx;
+		padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+		background-color: #ffffff;
+		border-top: 1px solid #e5e5e5;
+		flex-shrink: 0;
+}
+.message-input.data-v-0a633310 {
+		flex: 1;
+		background-color: #f5f6f8;
+		border: none;
+		border-radius: 50rpx;
+		padding: 20rpx 32rpx;
+		font-size: 28rpx;
+}
+.send-btn.data-v-0a633310 {
+		width: 80rpx;
+		height: 80rpx;
+		border-radius: 50%;
+		background-color: #ccc;
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s;
+}
+.send-btn-active.data-v-0a633310 {
+		background-color: #00B4D8 !important;
+}
+.send-btn.data-v-0a633310:active {
+		transform: scale(0.95);
+}
+.send-btn-active.data-v-0a633310:active {
+		background-color: #0099cc !important;
+}
+.send-btn[disabled].data-v-0a633310 {
+		opacity: 0.6;
+}

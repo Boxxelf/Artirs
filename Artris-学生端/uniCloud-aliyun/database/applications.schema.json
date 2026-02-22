@@ -1,0 +1,70 @@
+{
+	"bsonType": "object",
+	"required": ["student_id", "school_name"],
+	"permission": {
+		"read": "auth.uid == doc.student_id || auth.uid != null",
+		"create": "auth.uid == doc.student_id || auth.uid != null",
+		"update": "auth.uid == doc.student_id || auth.uid != null",
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"student_id": {
+			"bsonType": "string",
+			"description": "学生ID",
+			"label": "学生"
+		},
+		"school_name": {
+			"bsonType": "string",
+			"description": "学校名称",
+			"label": "学校"
+		},
+		"progress": {
+			"bsonType": "number",
+			"description": "进度百分比",
+			"label": "进度",
+			"minimum": 0,
+			"maximum": 100,
+			"default": 0
+		},
+		"deadline": {
+			"bsonType": "timestamp",
+			"description": "截止日期",
+			"label": "截止日期"
+		},
+		"materials": {
+			"bsonType": "array",
+			"description": "申请材料列表",
+			"label": "材料",
+			"items": {
+				"bsonType": "object",
+				"properties": {
+					"name": {
+						"bsonType": "string",
+						"description": "材料名称"
+					},
+					"progress": {
+						"bsonType": "number",
+						"description": "完成进度",
+						"minimum": 0,
+						"maximum": 100
+					},
+					"status": {
+						"bsonType": "string",
+						"description": "状态：pending-进行中, completed-已完成",
+						"enum": ["pending", "completed"]
+					}
+				}
+			}
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

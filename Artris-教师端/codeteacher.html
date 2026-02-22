@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Artris Mentor Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d11e7",
+                        "accent-teal": "#008080",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            min-height: 100dvh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            background: rgba(16, 16, 34, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Shared Components ---
+
+        const Navigation = () => {
+            const location = useLocation();
+            const getActiveColor = (path) => location.pathname === path ? 'text-primary' : 'text-slate-400 dark:text-slate-600';
+            const getIconFill = (path) => location.pathname === path ? "'FILL' 1" : "'FILL' 0";
+
+            return (
+                <nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 px-6 pb-6 pt-3 flex justify-between items-center z-50">
+                    <Link to="/" class={`flex flex-col items-center gap-1 ${getActiveColor('/')}`}>
+                        <span class="material-symbols-outlined" style={{fontVariationSettings: getIconFill('/')}}>home</span>
+                        <span class="text-[10px] font-bold">首页</span>
+                    </Link>
+                    <Link to="/schedule" class={`flex flex-col items-center gap-1 ${getActiveColor('/schedule')}`}>
+                        <span class="material-symbols-outlined" style={{fontVariationSettings: getIconFill('/schedule')}}>calendar_today</span>
+                        <span class="text-[10px] font-medium">课表</span>
+                    </Link>
+                    <Link to="/earnings" class={`flex flex-col items-center gap-1 ${getActiveColor('/earnings')}`}>
+                        <span class="material-symbols-outlined" style={{fontVariationSettings: getIconFill('/earnings')}}>account_balance_wallet</span>
+                        <span class="text-[10px] font-medium">收入</span>
+                    </Link>
+                    <Link to="/messages" class={`flex flex-col items-center gap-1 ${getActiveColor('/messages')}`}>
+                        <span class="material-symbols-outlined" style={{fontVariationSettings: getIconFill('/messages')}}>chat_bubble</span>
+                        <span class="text-[10px] font-medium">消息</span>
+                    </Link>
+                    <Link to="/profile" class={`flex flex-col items-center gap-1 ${getActiveColor('/profile')}`}>
+                        <span class="material-symbols-outlined" style={{fontVariationSettings: getIconFill('/profile')}}>person</span>
+                        <span class="text-[10px] font-medium">我的</span>
+                    </Link>
+                </nav>
+            );
+        };
+
+        const Header = ({ title, showBack = false, rightIcon = "notifications", onRightClick }) => {
+            const navigate = useNavigate();
+            return (
+                <header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50">
+                    <div class="flex items-center gap-3 min-w-[40px]">
+                        {showBack ? (
+                            <button onClick={() => navigate(-1)} class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+                                <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">chevron_left</span>
+                            </button>
+                        ) : (
+                            <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                <span class="text-primary font-bold text-xl">A</span>
+                            </div>
+                        )}
+                    </div>
+                    <h1 class="text-lg font-bold tracking-tight text-center flex-1">{title}</h1>
+                    <button onClick={onRightClick} class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors min-w-[40px] flex justify-end">
+                        <span class="material-symbols-outlined">{rightIcon}</span>
+                        {rightIcon === "notifications" && <span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>}
+                    </button>
+                </header>
+            );
+        };
+
+        // --- Pages ---
+
+        const HomePage = () => {
+            return (
+                <div class="pb-24">
+                    <Header title="Artris" />
+                    <main class="max-w-md mx-auto px-5 pt-6 space-y-8">
+                        <section class="flex items-center gap-5">
+                            <div class="relative">
+                                <div class="size-20 rounded-full border-2 border-primary p-1">
+                                    <div class="size-full rounded-full bg-center bg-cover" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOuBhXWLMC5dnN26A_egpSOtmZW8SYgolExbubdhGFsqTpSDxkLM747DPRcF12-CgE5bVbmODaKwaz0hBJAzwJHzFj4MMZHR_6b3p0Biic1tvKKC7H6IXq6YvuxkbHsb5oHRSvvbC6qTi7W7aBdrPMpWLfEs2WXCQz2oTyY-6Lk-pyDI7dHfupuMNKCMbQ2KjnXUy-PQL4E5B_Od--V6LJu8UsZo_SeBKKTnG0dIGqwNGa1N9ToAlyHmC6Y1ITq48SlbSihROq-1a2')"}}></div>
+                                </div>
+                                <div class="absolute -bottom-1 -right-1 bg-accent-teal text-white size-6 rounded-full flex items-center justify-center border-2 border-white dark:border-background-dark">
+                                    <span class="material-symbols-outlined text-[14px]">verified</span>
+                                </div>
+                            </div>
+                            <div class="space-y-0.5">
+                                <h2 class="text-2xl font-bold">Zhang Laoshi</h2>
+                                <p class="text-primary font-medium text-sm">RISD | 专业艺术导师</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs">Rhode Island School of Design</p>
+                            </div>
+                        </section>
+
+                        <section class="glass-card rounded-xl p-6 shadow-sm overflow-hidden relative">
+                            <div class="absolute -top-12 -right-12 size-32 bg-primary/5 rounded-full blur-3xl"></div>
+                            <div class="relative z-10">
+                                <div class="flex justify-between items-start mb-4">
+                                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">本月预计收入</p>
+                                    <Link to="/earnings" class="text-primary text-xs font-bold flex items-center gap-1 group">
+                                        查看账单 
+                                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+                                    </Link>
+                                </div>
+                                <div class="flex items-baseline gap-1 mb-6">
+                                    <span class="text-2xl font-bold text-slate-900 dark:text-slate-100">¥</span>
+                                    <span class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">12,500</span>
+                                </div>
+                                <div class="flex items-center gap-4 text-sm">
+                                    <div class="flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 rounded-full text-primary font-medium">
+                                        <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                        已完成课时: 24h
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="grid grid-cols-2 gap-4">
+                            <div class="glass-card rounded-lg p-4 flex items-center gap-3 border-l-4 border-accent-teal">
+                                <div class="size-10 rounded-full bg-accent-teal/10 text-accent-teal flex items-center justify-center">
+                                    <span class="material-symbols-outlined">event_repeat</span>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">待确认</p>
+                                    <p class="text-sm font-bold">2个新预约</p>
+                                </div>
+                            </div>
+                            <div class="glass-card rounded-lg p-4 flex items-center gap-3 border-l-4 border-primary">
+                                <div class="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined">rate_review</span>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">待回复</p>
+                                    <p class="text-sm font-bold">1个新评价</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-bold">今日课表</h3>
+                                <span class="text-xs text-slate-500 font-medium bg-slate-200/50 dark:bg-slate-800/50 px-2 py-1 rounded">2023.10.24</span>
+                            </div>
+                            <div class="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm border border-primary/20 relative overflow-hidden">
+                                <div class="absolute top-0 right-0 px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-bl-lg uppercase tracking-wider">进行中</div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="size-12 rounded-full bg-slate-100 bg-center bg-cover" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBknlES0wQDeF2sr5hQS532ikgkjc5rAdu4n2QvnsOCctcHAzab1khpHYKHFRvgTtk6sXfNUlUdoY1fyFVsZT5vIGK0Zoqd9wApg47d4BPRxvSog4ehB0oYQqtJ5BroNhXHVl1BABK1ZAEGJeQ_Qq5wwAWPeSr41Uq4M1qwf86TD7ltzqq6IenwC3wyMGxq8uwtQuR6UnZkj_9C3yRYN0Ty7sYKESFZJqw1E9A4No6pY0AfZkACOjhTPfjm0mGgOv-B2-D8zhgrJWsn')"}}></div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-slate-100">Li Hua (李华)</p>
+                                            <p class="text-xs text-slate-500">当代艺术基础课程</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-bold text-primary">14:00 - 15:00</p>
+                                        <p class="text-[10px] text-slate-400">距离开始还有 5 分钟</p>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                                    <span class="material-symbols-outlined">video_call</span>
+                                    进入课堂
+                                </button>
+                            </div>
+                            <div class="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center gap-3">
+                                        <div class="size-12 rounded-full bg-slate-100 bg-center bg-cover" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAA4j1oAYugUrY7vv-wZggpeOQsdQ6Ns9hRKTCJPL47_s3ZD3xdGDqqYtlHeK2NvJabuB1GFtD_zsfVozO1_TpP8GG-E0xYMtITbqqSlrtIVbWgbQOfCRuF8B4QO2QgVMDbXUc9kzf1m7XKRMLRBBe46YcOfe6vfKc6q_tn4RbUgUTAL6515S7jTGVW7rCc7O-3Fh19E03HArdRPrRyShhkvNTqwPDi-sN6BtTFREKlTDdyKFznwnxHpic2j0JKGvBUQY6S8mj3rlGQ')"}}></div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-slate-100">Wang Fang (王芳)</p>
+                                            <p class="text-xs text-slate-500">作品集点评与指导</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-bold text-slate-600 dark:text-slate-300">16:30 - 17:30</p>
+                                        <p class="text-[10px] text-slate-400">今日稍后</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Navigation />
+                </div>
+            );
+        };
+
+        const SchedulePage = () => {
+            return (
+                <div class="pb-24">
+                    <Header title="课表" rightIcon="settings" />
+                    <main class="flex-1 overflow-y-auto">
+                        <section class="p-4">
+                            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-primary/5 p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <button class="p-2 hover:bg-primary/5 rounded-full">
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <h2 class="text-base font-bold">2023年 10月</h2>
+                                    <button class="p-2 hover:bg-primary/5 rounded-full">
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                                <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                                    {['日', '一', '二', '三', '四', '五', '六'].map(day => (
+                                        <div key={day} class="text-[11px] font-bold text-slate-400 uppercase">{day}</div>
+                                    ))}
+                                </div>
+                                <div class="grid grid-cols-7 gap-y-2">
+                                    <div class="h-10 flex flex-col items-center justify-center text-slate-300 text-sm">27</div>
+                                    <div class="h-10 flex flex-col items-center justify-center text-slate-300 text-sm">28</div>
+                                    <div class="h-10 flex flex-col items-center justify-center text-slate-300 text-sm">29</div>
+                                    <div class="h-10 flex flex-col items-center justify-center text-slate-300 text-sm">30</div>
+                                    {[1, 2, 3, 4].map(d => (
+                                        <button key={d} class="h-10 relative flex flex-col items-center justify-center text-sm font-medium hover:bg-primary/5 rounded-lg">{d}</button>
+                                    ))}
+                                    <button class="h-10 relative flex flex-col items-center justify-center text-sm font-bold bg-primary text-white shadow-lg shadow-primary/30 rounded-lg">
+                                        5
+                                        <span class="absolute bottom-1 w-1 h-1 bg-white rounded-full"></span>
+                                    </button>
+                                    <button class="h-10 relative flex flex-col items-center justify-center text-sm font-medium hover:bg-primary/5 rounded-lg">
+                                        6
+                                        <span class="absolute bottom-1 w-1 h-1 bg-primary rounded-full"></span>
+                                    </button>
+                                    {[7, 8, 9].map(d => (
+                                        <button key={d} class="h-10 relative flex flex-col items-center justify-center text-sm font-medium hover:bg-primary/5 rounded-lg">{d}</button>
+                                    ))}
+                                    <button class="h-10 relative flex flex-col items-center justify-center text-sm font-medium hover:bg-primary/5 rounded-lg">
+                                        10
+                                        <span class="absolute bottom-1 w-1 h-1 bg-primary rounded-full"></span>
+                                    </button>
+                                    <div class="col-span-7 grid grid-cols-7">
+                                        {[11, 12, 13, 14, 15, 16, 17].map(d => (
+                                            <div key={d} class="h-10 flex items-center justify-center text-sm">{d}</div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="px-4">
+                            <div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-xl p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined">payments</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-bold">预约设置</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">当前单价: <span class="text-primary font-bold">¥300/小时</span></p>
+                                    </div>
+                                </div>
+                                <button class="text-xs font-bold bg-primary text-white px-3 py-2 rounded-lg">修改设置</button>
+                            </div>
+                        </section>
+
+                        <section class="mt-6 px-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold">今日日程</h3>
+                                <span class="text-sm text-slate-500">10月5日, 周四</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+                                    <div class="flex flex-col items-center justify-center border-r border-slate-100 dark:border-slate-800 pr-4 min-w-[70px]">
+                                        <span class="text-sm font-bold">10:00</span>
+                                        <span class="text-[10px] text-slate-400">11:00</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span class="font-bold">李伟</span>
+                                            <span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-[10px] px-1.5 py-0.5 rounded font-medium">已确认</span>
+                                        </div>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">Portfolio Review · 作品集指导</p>
+                                    </div>
+                                    <button class="text-slate-400"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
+                                <div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+                                    <div class="flex flex-col items-center justify-center border-r border-slate-100 dark:border-slate-800 pr-4 min-w-[70px]">
+                                        <span class="text-sm font-bold">14:00</span>
+                                        <span class="text-[10px] text-slate-400">15:30</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span class="font-bold">张芳</span>
+                                            <span class="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-[10px] px-1.5 py-0.5 rounded font-medium">待确认</span>
+                                        </div>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">基础素描 · 1.5小时</p>
+                                    </div>
+                                    <button class="text-slate-400"><span class="material-symbols-outlined">more_vert</span></button>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-dashed border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                                    <div class="flex flex-col items-center justify-center border-r border-slate-200 dark:border-slate-700 pr-4 min-w-[70px]">
+                                        <span class="text-sm font-bold text-slate-400">16:30</span>
+                                        <span class="text-[10px] text-slate-400">18:00</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span class="font-bold text-slate-400">忙碌时间</span>
+                                            <span class="bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-400 text-[10px] px-1.5 py-0.5 rounded font-medium">例外</span>
+                                        </div>
+                                        <p class="text-sm text-slate-400 italic">私人行程，不接受预约</p>
+                                    </div>
+                                    <button class="text-slate-400"><span class="material-symbols-outlined text-sm">close</span></button>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="fixed bottom-24 right-6">
+                            <button class="bg-primary text-white shadow-xl shadow-primary/30 flex items-center gap-2 px-6 py-4 rounded-full font-bold">
+                                <span class="material-symbols-outlined">event_busy</span>
+                                <span>添加例外</span>
+                            </button>
+                        </div>
+                    </main>
+                    <Navigation />
+                </div>
+            );
+        };
+
+        const EarningsPage = () => {
+            const chartData = [
+                { m: '1月', h: '65%', val: '¥5.2k' },
+                { m: '2月', h: '85%', val: '¥7.1k' },
+                { m: '3月', h: '60%', val: '¥4.8k' },
+                { m: '4月', h: '75%', val: '¥6.2k' },
+                { m: '5月', h: '100%', val: '¥8.5k' },
+                { m: '6月', h: '45%', val: '¥3.9k' },
+            ];
+
+            return (
+                <div class="pb-24">
+                    <Header title="收入" showBack={true} rightIcon="visibility" />
+                    <main class="max-w-md mx-auto p-4 space-y-6">
+                        <section class="bg-primary rounded-xl p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden">
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <p class="text-sm font-medium opacity-80">总余额 (元)</p>
+                                    <span class="material-symbols-outlined text-white/50">account_balance_wallet</span>
+                                </div>
+                                <div class="flex items-baseline gap-1 mb-6">
+                                    <span class="text-xl font-bold">¥</span>
+                                    <span class="text-4xl font-bold tracking-tight">12,850.00</span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="flex-1 bg-white text-primary font-bold py-3 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                                        <span class="material-symbols-outlined text-[20px]">payments</span>
+                                        提现
+                                    </button>
+                                    <button class="px-4 bg-white/20 text-white font-medium py-3 rounded-lg flex items-center justify-center active:scale-95 transition-transform">
+                                        <span class="material-symbols-outlined">settings</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="absolute -right-10 -bottom-10 size-40 bg-white/10 rounded-full blur-3xl"></div>
+                        </section>
+
+                        <section class="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="font-bold text-slate-900 dark:text-white">近6个月收入概览</h2>
+                                    <p class="text-xs text-slate-500 mt-1">较前半年增长 <span class="text-accent-teal font-bold">+12.5%</span></p>
+                                </div>
+                                <div class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">
+                                    <span class="text-xs font-medium text-slate-600 dark:text-slate-400">2024</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end justify-between h-40 gap-2 px-1">
+                                {chartData.map(item => (
+                                    <div key={item.m} class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/10 dark:bg-primary/20 rounded-t-sm relative group">
+                                            <div class="absolute bottom-0 w-full bg-primary rounded-t-sm transition-all duration-500" style={{height: item.h}}></div>
+                                            <div class="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap z-20">{item.val}</div>
+                                        </div>
+                                        <span class="text-[10px] text-slate-500 font-medium">{item.m}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section class="space-y-4">
+                            <div class="flex items-center justify-between px-1">
+                                <h2 class="font-bold text-slate-900 dark:text-white">收入明细</h2>
+                                <button class="text-primary text-sm font-semibold">查看全部</button>
+                            </div>
+                            <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                                <div class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    {[
+                                        { name: '李明华', time: '2024-06-12 14:30', amount: '+¥500.00', course: '写生基础课' },
+                                        { name: '王小丫', time: '2024-06-11 09:00', amount: '+¥320.00', course: '色彩理论进阶' },
+                                        { name: '陈志强', time: '2024-06-10 18:15', amount: '+¥800.00', course: '1对1私教课' },
+                                    ].map((t, idx) => (
+                                        <div key={idx} class="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                            <div class="flex items-center gap-3">
+                                                <div class="size-10 rounded-full bg-accent-teal/10 flex items-center justify-center">
+                                                    <span class="material-symbols-outlined text-accent-teal">person</span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-bold text-sm">{t.name}</p>
+                                                    <p class="text-xs text-slate-500">{t.time}</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="font-bold text-primary">{t.amount}</p>
+                                                <p class="text-[10px] text-slate-400">{t.course}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Navigation />
+                </div>
+            );
+        };
+
+        const ProfilePage = () => {
+            const [isDarkMode, setIsDarkMode] = useState(false);
+
+            const toggleTheme = () => {
+                const root = document.documentElement;
+                if (root.classList.contains('dark')) {
+                    root.classList.remove('dark');
+                    setIsDarkMode(false);
+                } else {
+                    root.classList.add('dark');
+                    setIsDarkMode(true);
+                }
+            };
+
+            return (
+                <div class="pb-24">
+                    <Header title="我的" rightIcon="settings" onRightClick={toggleTheme} />
+                    <main class="flex-1 overflow-y-auto pb-24">
+                        <section class="p-6 flex flex-col items-center">
+                            <div class="relative">
+                                <div class="w-24 h-24 rounded-full border-4 border-white dark:border-slate-800 shadow-xl overflow-hidden bg-slate-200">
+                                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJeKs3Yaii9HmmO39mMjZiTI-LbMXxJ9WnS6KPq6TN4iwzJmfNRAGgjPozkECSVX1eAzT2bnhhjvU2Hbz7rkZ2jJ1gUu9wJO1NZ6whUYUziPgRYPknRquis7TLDPucknjwmHluSgVevmqm_Mtez5_Cna6ZIYEWq7WdZnevgO3I8LyDip5CGdfOJIGxs1B4eOqcIxeu3R4wT4RWURMspKvhNXpupf2FlL-6jJcH8yFan38D-L56OOyd7cixmuHnOpnoRXqLvVqiUz6L"/>
+                                </div>
+                                <div class="absolute bottom-0 right-0 bg-primary text-white p-1 rounded-full border-2 border-white dark:border-slate-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[16px] font-bold">verified</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-50">张老师</h2>
+                                <p class="text-primary font-medium mt-1">RISD · MFA</p>
+                                <div class="flex items-center justify-center gap-2 mt-2">
+                                    <span class="px-2.5 py-0.5 bg-primary/10 text-primary text-xs font-semibold rounded-full">已认证导师</span>
+                                    <span class="px-2.5 py-0.5 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                        接课中
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 w-full mt-8">
+                                <div class="bg-white dark:bg-slate-900 p-3 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                                    <p class="text-xl font-bold text-slate-900 dark:text-slate-50">128</p>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">累计授课</p>
+                                </div>
+                                <div class="bg-white dark:bg-slate-900 p-3 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                                    <p class="text-xl font-bold text-slate-900 dark:text-slate-50">4.9</p>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">学员评分</p>
+                                </div>
+                                <div class="bg-white dark:bg-slate-900 p-3 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                                    <p class="text-xl font-bold text-primary">¥8.6k</p>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">本月收益</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="px-4 space-y-6">
+                            <div class="space-y-2">
+                                <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase px-2 tracking-widest">专业身份</h3>
+                                <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+                                    <a class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-b border-slate-50 dark:border-slate-800" href="#">
+                                        <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center"><span class="material-symbols-outlined">edit_square</span></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-slate-900 dark:text-slate-100">导师资料编辑</p>
+                                            <p class="text-xs text-slate-500">更新简介、作品集及学术背景</p>
+                                        </div>
+                                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase px-2 tracking-widest">教务管理</h3>
+                                <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+                                    <a class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-b border-slate-50 dark:border-slate-800" href="#">
+                                        <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center"><span class="material-symbols-outlined">design_services</span></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-slate-900 dark:text-slate-100">服务设置</p>
+                                            <p class="text-xs text-slate-500">定义辅导类型（作品集、面试等）</p>
+                                        </div>
+                                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                    </a>
+                                    <a class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-b border-slate-50 dark:border-slate-800" href="#">
+                                        <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center"><span class="material-symbols-outlined">account_balance_wallet</span></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-slate-900 dark:text-slate-100">账户与收款</p>
+                                            <p class="text-xs text-slate-500">管理银行卡、支付宝及收益结算</p>
+                                        </div>
+                                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pt-4 pb-8">
+                                <button class="w-full py-4 rounded-xl bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 font-bold hover:bg-red-100 dark:hover:bg-red-900/20 transition-all border border-red-100 dark:border-red-900/20 flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-[20px]">logout</span>
+                                    退出登录
+                                </button>
+                                <p class="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-widest">Artris Mentor v2.4.0</p>
+                            </div>
+                        </div>
+                    </main>
+                    <Navigation />
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <div class="max-w-md mx-auto bg-background-light dark:bg-background-dark min-h-screen relative shadow-2xl">
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/schedule" element={<SchedulePage />} />
+                            <Route path="/earnings" element={<EarningsPage />} />
+                            <Route path="/messages" element={<div class="flex items-center justify-center h-screen text-slate-400">消息中心 (开发中) <Navigation /></div>} />
+                            <Route path="/profile" element={<ProfilePage />} />
+                        </Routes>
+                    </div>
+                </MemoryRouter>
+            );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

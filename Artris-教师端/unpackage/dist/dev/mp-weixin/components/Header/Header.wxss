@@ -1,0 +1,65 @@
+
+.header.data-v-5ada1ca4 {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20rpx 32rpx;
+		background-color: rgba(255, 255, 255, 0.9);
+		-webkit-backdrop-filter: blur(12px);
+		        backdrop-filter: blur(12px);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		z-index: 100;
+}
+.header-left.data-v-5ada1ca4 {
+		min-width: 80rpx;
+		display: flex;
+		align-items: center;
+}
+.back-btn.data-v-5ada1ca4 {
+		padding: 8rpx;
+}
+.logo-container.data-v-5ada1ca4 {
+		width: 80rpx;
+		height: 80rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba(255, 107, 53, 0.1);
+		border-radius: 50%;
+}
+.logo.data-v-5ada1ca4 {
+		width: 60rpx;
+		height: 60rpx;
+}
+.header-title.data-v-5ada1ca4 {
+		flex: 1;
+		text-align: center;
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.header-right.data-v-5ada1ca4 {
+		min-width: 80rpx;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+}
+.icon-btn.data-v-5ada1ca4 {
+		position: relative;
+		padding: 8rpx;
+}
+.badge.data-v-5ada1ca4 {
+		position: absolute;
+		top: 4rpx;
+		right: 4rpx;
+		width: 16rpx;
+		height: 16rpx;
+		background-color: #ff4757;
+		border-radius: 50%;
+		border: 2px solid #fff;
+}

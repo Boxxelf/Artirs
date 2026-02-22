@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "收入",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "header": "../../components/Header/Header",
+    "bottom-nav": "../../components/BottomNav/BottomNav"
+  }
+}

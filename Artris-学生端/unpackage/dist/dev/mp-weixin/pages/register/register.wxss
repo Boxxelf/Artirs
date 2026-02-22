@@ -1,0 +1,104 @@
+
+.register-page.data-v-bac4a35d {
+		min-height: 100vh;
+		background-color: #f5f6f8;
+}
+.navbar.data-v-bac4a35d {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx 32rpx;
+		background: rgba(255, 255, 255, 0.95);
+		-webkit-backdrop-filter: blur(10px);
+		        backdrop-filter: blur(10px);
+		border-bottom: 1px solid #e5e5e5;
+		z-index: 100;
+		padding-top: calc(20rpx + env(safe-area-inset-top));
+}
+.nav-title.data-v-bac4a35d {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+}
+.nav-placeholder.data-v-bac4a35d {
+		width: 48rpx;
+}
+.header.data-v-bac4a35d {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 64rpx 64rpx 48rpx;
+		background: linear-gradient(180deg, #00B4D8 0%, transparent 100%);
+}
+.logo.data-v-bac4a35d {
+		width: 160rpx;
+		height: 160rpx;
+		margin-bottom: 32rpx;
+}
+.welcome-title.data-v-bac4a35d {
+		font-size: 48rpx;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 16rpx;
+		text-align: center;
+}
+.welcome-subtitle.data-v-bac4a35d {
+		font-size: 28rpx;
+		color: #666;
+		text-align: center;
+}
+.form-container.data-v-bac4a35d {
+		background-color: #ffffff;
+		border-radius: 48rpx 48rpx 0 0;
+		padding: 64rpx 48rpx;
+		padding-bottom: calc(64rpx + env(safe-area-inset-bottom));
+		margin-top: -48rpx;
+		box-shadow: 0 -8rpx 32rpx rgba(0, 0, 0, 0.1);
+}
+.form-item.data-v-bac4a35d {
+		margin-bottom: 32rpx;
+}
+.input-wrapper.data-v-bac4a35d {
+		display: flex;
+		align-items: center;
+		background-color: #f5f6f8;
+		border-radius: 24rpx;
+		padding: 24rpx 32rpx;
+		gap: 24rpx;
+}
+.input.data-v-bac4a35d {
+		flex: 1;
+		font-size: 32rpx;
+		color: #333;
+}
+.register-btn.data-v-bac4a35d {
+		width: 100%;
+		background-color: #00B4D8;
+		color: #ffffff;
+		border: none;
+		border-radius: 24rpx;
+		padding: 32rpx;
+		font-size: 32rpx;
+		font-weight: bold;
+		margin-top: 32rpx;
+		margin-bottom: 32rpx;
+		box-shadow: 0 8rpx 24rpx rgba(0, 180, 216, 0.3);
+}
+.register-btn-disabled.data-v-bac4a35d {
+		background-color: #cccccc;
+		box-shadow: none;
+}
+.login-link.data-v-bac4a35d {
+		display: flex;
+		justify-content: center;
+		margin-top: 32rpx;
+}
+.login-text.data-v-bac4a35d {
+		font-size: 28rpx;
+		color: #00B4D8;
+}

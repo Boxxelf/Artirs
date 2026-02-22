@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "预约详情",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "header": "../../components/Header/Header"
+  }
+}

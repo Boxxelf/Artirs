@@ -1,0 +1,98 @@
+{
+	"bsonType": "object",
+	"required": ["student_id", "mentor_id", "appointment_date", "appointment_time", "total_amount"],
+	"permission": {
+		"read": "auth.uid == doc.student_id || auth.uid == doc.mentor_id || auth.uid != null",
+		"create": "auth.uid == doc.student_id || auth.uid != null",
+		"update": "auth.uid == doc.mentor_id || auth.uid == doc.student_id || auth.uid != null",
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"order_no": {
+			"bsonType": "string",
+			"description": "订单号",
+			"label": "订单号"
+		},
+		"student_id": {
+			"bsonType": "string",
+			"description": "学生ID",
+			"label": "学生"
+		},
+		"mentor_id": {
+			"bsonType": "string",
+			"description": "导师ID",
+			"label": "导师"
+		},
+		"appointment_date": {
+			"bsonType": "string",
+			"description": "预约日期",
+			"label": "日期"
+		},
+		"appointment_time": {
+			"bsonType": "string",
+			"description": "预约时间",
+			"label": "时间"
+		},
+		"duration": {
+			"bsonType": "number",
+			"description": "时长（分钟）",
+			"label": "时长",
+			"default": 60
+		},
+		"course_name": {
+			"bsonType": "string",
+			"description": "课程名称",
+			"label": "课程"
+		},
+		"price": {
+			"bsonType": "number",
+			"description": "原价",
+			"label": "原价"
+		},
+		"discount": {
+			"bsonType": "number",
+			"description": "优惠金额",
+			"label": "优惠",
+			"default": 0
+		},
+		"total_amount": {
+			"bsonType": "number",
+			"description": "实付金额",
+			"label": "实付"
+		},
+		"status": {
+			"bsonType": "string",
+			"description": "订单状态：pending-待确认, confirmed-已确认, completed-已完成, cancelled-已取消",
+			"label": "状态",
+			"enum": ["pending", "confirmed", "completed", "cancelled"],
+			"default": "pending"
+		},
+		"zoom_meeting_id": {
+			"bsonType": "string",
+			"description": "Zoom会议ID",
+			"label": "会议ID"
+		},
+		"zoom_join_url": {
+			"bsonType": "string",
+			"description": "Zoom加入链接",
+			"label": "加入链接"
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		},
+		"update_date": {
+			"bsonType": "timestamp",
+			"description": "更新时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}
