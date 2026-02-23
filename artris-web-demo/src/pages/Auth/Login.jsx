@@ -143,12 +143,16 @@ export default function Login() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <img
-                src={`${import.meta.env.BASE_URL || '/'}ArtrisStudent.png`}
+                src="/Artirs/ArtrisStudent.png"
                 alt="Artris Logo"
                 className="h-20 w-auto"
                 onError={(e) => {
-                  // Fallback if image fails to load
-                  e.target.style.display = 'none';
+                  // Try fallback path
+                  if (e.target.src !== '/ArtrisStudent.png') {
+                    e.target.src = '/ArtrisStudent.png';
+                  } else {
+                      e.target.style.display = 'none';
+                    }
                 }}
               />
             </div>
