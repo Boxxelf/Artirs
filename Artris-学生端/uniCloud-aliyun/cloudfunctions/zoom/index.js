@@ -1,12 +1,7 @@
 const axios = require('axios')
 const crypto = require('crypto')
 
-// 你的 Zoom 密钥
-const ZOOM_ACCOUNT_ID = 'V82clEmzQW-Erk3jXY-ThA'
-const ZOOM_CLIENT_ID = 'vi4bv5V3Sx6zJH5vgObLdQ'
-const ZOOM_CLIENT_SECRET = 'cFS61I8NzE80yNbTIg1axR7xhrYWamwK'
-const ZOOM_SDK_KEY = 'llOnwIgRQxSBi7QWlA7uew'
-const ZOOM_SDK_SECRET = 'XAll08GTfIL6C3nMuvE6luBQslWU6LfD'
+
 
 // 获取 Token
 async function getZoomToken() {
