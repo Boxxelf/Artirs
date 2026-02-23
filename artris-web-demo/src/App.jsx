@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { useAuth } from './context/AuthContext';
@@ -324,9 +324,9 @@ function App() {
   return (
     <AuthProvider>
       <LanguageProvider>
-        <BrowserRouter>
+        <HashRouter>
           <AppRoutes />
-        </BrowserRouter>
+        </HashRouter>
       </LanguageProvider>
     </AuthProvider>
   );

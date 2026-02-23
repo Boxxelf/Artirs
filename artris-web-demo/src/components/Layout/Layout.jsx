@@ -73,7 +73,7 @@ export default function Layout({ children }) {
                 className="flex items-center space-x-3"
               >
                 <img
-                  src="/ArtrisStudent.png"
+                  src={`${import.meta.env.BASE_URL}ArtrisStudent.png`}
                   alt="Artris"
                   className="h-10 w-auto"
                 />
