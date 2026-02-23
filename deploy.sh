@@ -2,28 +2,39 @@
 # GitHub Pages 部署脚本
 set -e
 
-# 设置 PATH 以确保能找到 npm
-export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+# 设置 PATH
+export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
 
-# 检测 npm 命令
+# 检测 Node.js
+if ! command -v node &> /dev/null; then
+    echo "❌ 错误: 未找到 Node.js"
+    echo "请先安装 Node.js: https://nodejs.org/"
+    exit 1
+fi
+
+# 检测 npm - 尝试多种方式
 NPM_CMD=""
 if command -v npm &> /dev/null; then
     NPM_CMD="npm"
-elif [ -f "/usr/local/bin/npm" ]; then
-    NPM_CMD="/usr/local/bin/npm"
+elif [ -f "/usr/local/lib/node_modules/corepack/shims/npm" ]; then
+    NPM_CMD="/usr/local/lib/node_modules/corepack/shims/npm"
+elif command -v npx &> /dev/null; then
+    # 使用 npx 来运行 npm 命令
+    NPM_CMD="npx --yes npm"
 else
     echo "❌ 错误: 未找到 npm 命令"
     echo ""
-    echo "请先安装 Node.js 和 npm:"
-    echo "  方法 1: 访问 https://nodejs.org/ 下载安装"
-    echo "  方法 2: 使用 Homebrew: brew install node"
+    echo "Node.js 已安装，但 npm 不可用。"
+    echo "请尝试："
+    echo "  1. 重新安装 Node.js: https://nodejs.org/"
+    echo "  2. 或运行: corepack enable"
     echo ""
-    echo "安装完成后，重新运行此脚本。"
     exit 1
 fi
 
 echo "🚀 开始部署到 GitHub Pages..."
-echo "📦 使用 npm: $($NPM_CMD --version)"
+echo "📦 Node.js: $(node --version)"
+echo "📦 使用: $NPM_CMD"
 cd "$(dirname "$0")/artris-web-demo"
 
 if [ ! -d "node_modules" ]; then
