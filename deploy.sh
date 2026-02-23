@@ -19,7 +19,6 @@ if command -v npm &> /dev/null; then
 elif [ -f "/usr/local/lib/node_modules/corepack/shims/npm" ]; then
     NPM_CMD="/usr/local/lib/node_modules/corepack/shims/npm"
 elif command -v npx &> /dev/null; then
-    # 使用 npx 来运行 npm 命令
     NPM_CMD="npx --yes npm"
 else
     echo "❌ 错误: 未找到 npm 命令"
@@ -46,7 +45,14 @@ echo "🔨 构建项目..."
 NODE_ENV=production $NPM_CMD run build
 
 echo "📤 部署到 GitHub Pages..."
-$NPM_CMD run deploy
+# 直接使用 node_modules 中的 gh-pages，避免 npm PATH 问题
+if [ -f "node_modules/.bin/gh-pages" ]; then
+    export PATH="$(pwd)/node_modules/.bin:$PATH"
+    ./node_modules/.bin/gh-pages -d dist
+else
+    # 如果 gh-pages 不在 node_modules，使用 npx
+    $NPM_CMD exec gh-pages -d dist
+fi
 
 echo "✅ 部署完成！"
 echo "🌐 网站地址: https://boxxelf.github.io/Artirs/"
