@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   // Change this to your repository name for GitHub Pages
   // For local development, use '/'
-  base: process.env.NODE_ENV === 'production' ? '/artris-web-demo/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/Artirs/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
