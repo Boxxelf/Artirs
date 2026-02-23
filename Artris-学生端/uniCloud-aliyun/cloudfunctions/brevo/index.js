@@ -2,8 +2,11 @@
 
 const axios = require('axios')
 
-// Brevo API 配置（需要替换为实际的 API Key）
-const BREVO_API_KEY = process.env.BREVO_API_KEY || 'REPLACED_WITH_ENV_VAR'
+// Brevo API 配置（从环境变量读取，必须设置 BREVO_API_KEY）
+const BREVO_API_KEY = process.env.BREVO_API_KEY
+if (!BREVO_API_KEY) {
+	throw new Error('BREVO_API_KEY 环境变量未设置，请在 uniCloud 控制台配置环境变量')
+}
 const BREVO_API_URL = 'https://api.brevo.com/v3'
 
 // 发送邮件
