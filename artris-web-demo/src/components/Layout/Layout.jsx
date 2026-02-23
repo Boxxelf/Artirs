@@ -73,9 +73,13 @@ export default function Layout({ children }) {
                 className="flex items-center space-x-3"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}ArtrisStudent.png`}
+                  src={`${import.meta.env.BASE_URL || '/'}ArtrisStudent.png`}
                   alt="Artris"
                   className="h-10 w-auto"
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    e.target.style.display = 'none';
+                  }}
                 />
                 <span className="text-2xl font-bold text-primary-600">
                   Artris

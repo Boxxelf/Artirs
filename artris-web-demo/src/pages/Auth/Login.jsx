@@ -143,9 +143,13 @@ export default function Login() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <img
-                src={`${import.meta.env.BASE_URL}ArtrisStudent.png`}
+                src={`${import.meta.env.BASE_URL || '/'}ArtrisStudent.png`}
                 alt="Artris Logo"
                 className="h-20 w-auto"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  e.target.style.display = 'none';
+                }}
               />
             </div>
             <h1 className="text-4xl font-bold text-primary-600 mb-2">Artris</h1>
