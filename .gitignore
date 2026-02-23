@@ -1,0 +1,81 @@
+# 依赖目录
+node_modules/
+**/node_modules/
+
+# 构建产物
+dist/
+dist-ssr/
+unpackage/
+**/unpackage/
+**/dist/
+**/dist-ssr/
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 环境变量和配置文件（可能包含敏感信息）
+.env
+.env.local
+.env.*.local
+*.local
+.env.production
+.env.development
+
+# 编辑器配置
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+
+# 操作系统文件
+Thumbs.db
+.DS_Store
+*.sw?
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# 敏感信息文件
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+secrets.json
+config.local.json
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 打包文件
+*.zip
+*.tar.gz
+*.rar
+
+# 其他
+*.pdf
+*.jpg
+*.jpeg
+*.png
+!public/**/*.png
+!public/**/*.jpg
+!static/**/*.png
+!static/**/*.jpg
+!info/**/*.png
+!info/**/*.jpg
+!info/**/*.pdf
